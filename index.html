@@ -65,9 +65,18 @@ body {
 .num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
 
 header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.title-row { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
 h1 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 0.01em; }
 .asof { font-size: 12px; color: var(--muted); }
 .asof b { color: var(--fg); font-weight: 500; }
+.refresh {
+  appearance: none; -webkit-appearance: none;
+  border: 0; background: none; padding: 0; margin: 0;
+  font: inherit; font-size: 12px; font-weight: 400; line-height: inherit;
+  color: var(--accent); cursor: pointer;
+}
+.refresh:disabled { color: var(--muted); }
+.refresh:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
 /* Signal lamp */
 .signal { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: flex; gap: 16px; align-items: center; }
@@ -139,7 +148,10 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 
 <div class="wrap">
   <header>
-    <h1>Market Monitor 速覽</h1>
+    <div class="title-row">
+      <h1>Market Monitor 速覽</h1>
+      <button type="button" class="refresh" id="refresh">更新</button>
+    </div>
     <div class="asof">數據日期 <b class="num" id="asof">–</b> · <span id="src">載入中</span></div>
   </header>
 
@@ -341,7 +353,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 
   // Live data from the public sheet. On failure, show a reason and do not fall back to sample data.
   try {
-    fetch('https://docs.google.com/spreadsheets/d/' + SHEET + '/gviz/tq?tqx=out:csv&gid=' + GID)
+    fetch('https://docs.google.com/spreadsheets/d/' + SHEET + '/gviz/tq?tqx=out:csv&gid=' + GID, { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.text();
@@ -364,6 +376,14 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     var m = (e && e.message) ? String(e.message) : '未知錯誤';
     showError('讀取失敗：' + m);
   }
+
+  $('refresh').addEventListener('click', function () {
+    this.disabled = true;
+    this.textContent = '更新中';
+    var u = new URL(location.href);
+    u.searchParams.set('r', String(Date.now()));
+    location.replace(u.toString());
+  });
 })();
 </script>
 
