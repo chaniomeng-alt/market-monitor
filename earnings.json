@@ -1,13 +1,37 @@
 {
-  "updated": "2026-11-10T20:38:00+08:00",
-  "updatedLabel": "11/10 20:38",
-  "focus": "業績季尾聲。開市前重點係 Sea（收入勝街，盤前約跌 6%）同 TransDigm（季績勝預期，但 FY27 指引低於街估）。昨日 Constellation 收市升約 10.5%。今晚留意 CoreWeave。",
-  "upcomingNote": "只列今個星期。日期以公司確認為準。",
+  "updated": "2026-11-11T13:48:00+08:00",
+  "updatedLabel": "11/11 13:48",
+  "focus": "CoreWeave 昨晚收市後公布季績：收入 $3.66B（+168% YoY）勝街，並上調全年指引，夜盤約升 15.7%。Sea 收市跌 1.5%，TransDigm 收市微升。明日留意 Nebius 開市前，以及 Cisco、Applied Materials、Cerebras 收市後。",
   "stocks": [
+    {
+      "name": "CoreWeave（CRWV）",
+      "date": "11/10 收市後",
+      "change": "夜盤約 +15.7%",
+      "changeTone": "up",
+      "metrics": [
+        {
+          "label": "Sales",
+          "value": "$3.661B",
+          "note": "+168% YoY · 勝街",
+          "noteTone": "up"
+        },
+        {
+          "label": "Adj EPS",
+          "value": "−$0.95",
+          "note": "勝街（街估 −$1.16）",
+          "noteTone": "up"
+        }
+      ],
+      "bullets": [
+        "上調全年收入指引至 $13.0–13.3B，經調整經營溢利指引中位升約 26%",
+        "收入積壓約 $132.5B；淨虧 $709M，利息開支 $846M 仍係焦點"
+      ],
+      "source": "來源：CoreWeave IR、Yahoo Finance、CNBC"
+    },
     {
       "name": "Sea Limited（SE）",
       "date": "11/10 開市前",
-      "change": "盤前約 −6%",
+      "change": "收市 −1.49%",
       "changeTone": "down",
       "metrics": [
         {
@@ -19,8 +43,8 @@
         {
           "label": "EPS",
           "value": "$0.78",
-          "note": "+32% YoY · 部分街估略低",
-          "noteTone": "mid"
+          "note": "+32% YoY · 遜街",
+          "noteTone": "down"
         }
       ],
       "bullets": [
@@ -32,8 +56,8 @@
     {
       "name": "TransDigm（TDG）",
       "date": "11/10 開市前",
-      "change": "盤前近持平",
-      "changeTone": "down",
+      "change": "收市 +0.55%",
+      "changeTone": "up",
       "metrics": [
         {
           "label": "Sales",
@@ -53,43 +77,13 @@
         "FY27 Adj EPS 指引中位低於部分街估"
       ],
       "source": "來源：TransDigm IR、Yahoo Finance"
-    },
-    {
-      "name": "Constellation Energy（CEG）",
-      "date": "11/9 開市前",
-      "change": "收市 +10.46%",
-      "changeTone": "up",
-      "metrics": [
-        {
-          "label": "Sales",
-          "value": "$9.55B",
-          "note": "+45.4% YoY · 勝街",
-          "noteTone": "up"
-        },
-        {
-          "label": "Adj EPS",
-          "value": "$5.06",
-          "note": "約 +66% YoY · 勝街",
-          "noteTone": "up"
-        }
-      ],
-      "bullets": [
-        "再上調全年 Adj EPS 指引至 $12.50–$12.80",
-        "主因市場組合有利，加 Calpine 併購貢獻"
-      ],
-      "source": "來源：Constellation IR／8-K、Yahoo Finance"
     }
   ],
   "upcoming": [
     {
-      "date": "11/10",
-      "name": "CoreWeave（CRWV）",
-      "note": "收市後；AI 雲算力需求同指引"
-    },
-    {
       "date": "11/12",
       "name": "Nebius（NBIS）",
-      "note": "開市前；AI 雲／虧損收窄焦點"
+      "note": "開市前；AI 雲／虧損同融資焦點"
     },
     {
       "date": "11/12",
@@ -106,5 +100,6 @@
       "name": "Cerebras（CBRS）",
       "note": "收市後；AI 晶片新股業績焦點"
     }
-  ]
+  ],
+  "upcomingNote": "只列今個星期。日期以公司確認為準。"
 }
