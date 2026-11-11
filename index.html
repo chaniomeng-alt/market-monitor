@@ -142,6 +142,50 @@ td .d.g { background: var(--up); } td .d.y { background: var(--mid); } td .d.r {
 td.up { color: var(--up); } td.down { color: var(--down); }
 .tag-ch { font-family: var(--font-body); font-size: 10px; color: var(--accent); margin-left: 4px; font-weight: 500; }
 .foot { font-size: 11px; color: var(--muted); text-align: center; }
+
+.tabs { display: flex; gap: 18px; border-bottom: 1px solid var(--line); }
+.tab {
+  appearance: none; -webkit-appearance: none;
+  border: 0; background: none; padding: 8px 0 10px; margin: 0;
+  font: inherit; font-size: 13px; font-weight: 500; color: var(--muted);
+  cursor: pointer;
+}
+.tab.on { color: var(--fg); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); }
+.tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.view { display: flex; flex-direction: column; gap: 12px; }
+.view[hidden] { display: none !important; }
+
+.stock-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.stock-name { font-size: 15px; font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 11px; color: var(--muted);
+  background: var(--surface-2); border-radius: 999px; padding: 3px 8px;
+}
+.tag.up { color: var(--up); background: var(--up-soft); }
+.tag.down { color: var(--down); background: var(--down-soft); }
+.stock .tiles { margin-top: 10px; }
+.stock .tile { background: var(--surface-2); border: 0; border-radius: 10px; padding: 8px 10px; }
+.stock .tile .k { font-size: 11px; }
+.stock .tile .v { font-size: 18px; }
+.stock .tile .p { font-family: var(--font-body); }
+.p.up { color: var(--up); } .p.down { color: var(--down); } .p.mid { color: var(--mid); }
+.stock ul { margin: 10px 0 0; padding-left: 18px; font-size: 13px; }
+.stock li { margin: 0 0 6px; }
+.stock li:last-child { margin-bottom: 0; }
+.src { font-size: 11px; color: var(--muted); margin-top: 8px; }
+.earn-row { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.earn-row:first-of-type { padding-top: 0; }
+.earn-row:last-of-type { border-bottom: 0; padding-bottom: 0; }
+.when {
+  flex: none; min-width: 44px; text-align: center;
+  font-family: var(--font-num); font-variant-numeric: tabular-nums;
+  font-size: 12px; font-weight: 500;
+  background: var(--surface-2); border-radius: 8px; padding: 6px 8px;
+}
+.earn-row .nm { font-weight: 500; }
+.earn-row .nt { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.note { font-size: 11px; color: var(--muted); margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -152,11 +196,17 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       <h1>Market Monitor 速覽</h1>
       <button type="button" class="refresh" id="refresh">更新</button>
     </div>
-    <div class="asof">數據日期 <b class="num" id="asof">–</b> · <span id="src">載入中</span></div>
+    <div class="asof"><span id="asof-k">數據日期</span> <b class="num" id="asof">–</b> · <span id="src">載入中</span></div>
   </header>
+
+  <nav class="tabs" aria-label="分頁">
+    <button type="button" class="tab on" id="tab-lamp" aria-selected="true">燈號</button>
+    <button type="button" class="tab" id="tab-earn" aria-selected="false">業績</button>
+  </nav>
 
   <div class="foot" id="err" hidden></div>
 
+  <div class="view" id="view-lamp">
   <section class="signal" aria-live="polite">
     <div class="housing" aria-hidden="true">
       <div class="lamp" id="lg"></div>
@@ -195,6 +245,13 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   </details>
 
   <div class="foot">數據來自 Stockbee Market Monitor 公開表格，只供自己參考。</div>
+  </div>
+
+  <div class="view" id="view-earn" hidden>
+    <div id="earn-list"></div>
+    <div class="foot" id="earn-err" hidden></div>
+    <div class="foot">數據由業績期追蹤整理，只供自己參考。</div>
+  </div>
 </div>
 
 <script>
@@ -376,6 +433,144 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     var m = (e && e.message) ? String(e.message) : '未知錯誤';
     showError('讀取失敗：' + m);
   }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function tone(v) { return v === 'up' || v === 'down' || v === 'mid' ? v : ''; }
+
+  var currentTab = 'lamp';
+  var earnData = null;
+  var lampAsof = { k: '數據日期', d: '–', s: '載入中' };
+
+  var origRender = render;
+  render = function (data, live) {
+    origRender(data, live);
+    lampAsof = { k: '數據日期', d: $('asof').textContent, s: $('src').textContent };
+  };
+  var origShowError = showError;
+  showError = function (msg) {
+    origShowError(msg);
+    lampAsof = { k: '數據日期', d: $('asof').textContent, s: $('src').textContent };
+    if (currentTab === 'earn') $('err').hidden = true;
+  };
+
+  function applyHeader() {
+    if (currentTab === 'earn') {
+      $('asof-k').textContent = '更新時間';
+      if (earnData) {
+        $('asof').textContent = earnData.updatedLabel || '–';
+        $('src').textContent = '業績';
+      } else if ($('earn-err') && !$('earn-err').hidden && $('earn-err').textContent) {
+        $('asof').textContent = '–';
+        $('src').textContent = '讀取失敗';
+      } else {
+        $('asof').textContent = '–';
+        $('src').textContent = '載入中';
+      }
+      $('err').hidden = true;
+    } else {
+      $('asof-k').textContent = lampAsof.k;
+      $('asof').textContent = lampAsof.d;
+      $('src').textContent = lampAsof.s;
+      var e = $('err');
+      e.hidden = !e.textContent;
+    }
+  }
+
+  function showTab(name) {
+    currentTab = name === 'earn' ? 'earn' : 'lamp';
+    $('tab-lamp').className = 'tab' + (currentTab === 'lamp' ? ' on' : '');
+    $('tab-earn').className = 'tab' + (currentTab === 'earn' ? ' on' : '');
+    $('tab-lamp').setAttribute('aria-selected', currentTab === 'lamp' ? 'true' : 'false');
+    $('tab-earn').setAttribute('aria-selected', currentTab === 'earn' ? 'true' : 'false');
+    $('view-lamp').hidden = currentTab !== 'lamp';
+    $('view-earn').hidden = currentTab !== 'earn';
+    applyHeader();
+    var hash = currentTab === 'earn' ? '#業績' : '#燈號';
+    if (decodeURIComponent(location.hash || '') !== hash) history.replaceState(null, '', hash);
+  }
+
+  function renderEarn(data) {
+    earnData = data;
+    var el = $('earn-list');
+    var err = $('earn-err');
+    err.hidden = true;
+    err.textContent = '';
+    var html = '';
+    (data.stocks || []).forEach(function (s) {
+      html += '<article class="panel stock">';
+      html += '<div class="stock-head"><div class="stock-name">' + esc(s.name) + '</div><div class="tags">';
+      if (s.date) html += '<span class="tag">' + esc(s.date) + '</span>';
+      if (s.change) html += '<span class="tag ' + tone(s.changeTone) + '">' + esc(s.change) + '</span>';
+      html += '</div></div><div class="tiles">';
+      (s.metrics || []).forEach(function (m) {
+        html += '<div class="tile"><div class="k">' + esc(m.label) + '</div>';
+        html += '<div class="v">' + esc(m.value) + '</div>';
+        html += '<div class="p ' + tone(m.noteTone) + '">' + esc(m.note) + '</div></div>';
+      });
+      html += '</div>';
+      if (s.bullets && s.bullets.length) {
+        html += '<ul>' + s.bullets.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>';
+      }
+      if (s.source) html += '<div class="src">' + esc(s.source) + '</div>';
+      html += '</article>';
+    });
+    if (data.upcoming && data.upcoming.length) {
+      html += '<section class="panel"><h2>本週即將公布</h2>';
+      data.upcoming.forEach(function (u) {
+        html += '<div class="earn-row"><div class="when">' + esc(u.date) + '</div><div>';
+        html += '<div class="nm">' + esc(u.name) + '</div>';
+        if (u.note) html += '<div class="nt">' + esc(u.note) + '</div>';
+        html += '</div></div>';
+      });
+      if (data.upcomingNote) html += '<div class="note">' + esc(data.upcomingNote) + '</div>';
+      html += '</section>';
+    }
+    if (data.focus) {
+      html += '<section class="panel"><strong>市場焦點：</strong>' + esc(data.focus) + '</section>';
+    }
+    el.innerHTML = html;
+    if (currentTab === 'earn') applyHeader();
+  }
+
+  function showEarnError(msg) {
+    $('earn-list').innerHTML = '';
+    var err = $('earn-err');
+    err.hidden = false;
+    err.textContent = msg;
+    if (currentTab === 'earn') {
+      $('asof-k').textContent = '更新時間';
+      $('asof').textContent = '–';
+      $('src').textContent = '讀取失敗';
+    }
+  }
+
+  fetch('earnings.json', { cache: 'no-store' })
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      if (!data || !data.stocks || !data.stocks.length) {
+        showEarnError('讀取失敗：業績資料是空的');
+        return;
+      }
+      renderEarn(data);
+    })
+    .catch(function (e) {
+      var m = (e && e.message) ? String(e.message) : '';
+      if (/^HTTP\s+\d+/.test(m)) showEarnError('讀取失敗：' + m);
+      else showEarnError('讀取失敗：網絡或檔案未能載入');
+    });
+
+  $('tab-lamp').addEventListener('click', function () { showTab('lamp'); });
+  $('tab-earn').addEventListener('click', function () { showTab('earn'); });
+  window.addEventListener('hashchange', function () {
+    showTab(decodeURIComponent(location.hash) === '#業績' ? 'earn' : 'lamp');
+  });
+  if (decodeURIComponent(location.hash) === '#業績') showTab('earn');
 
   $('refresh').addEventListener('click', function () {
     this.disabled = true;
