@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Market Monitor 速覽</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: phone-first single column. Signal lamp on top, four breadth tiles, 20-day bar chart, then folded detail. */
+:root {
+  --bg: #eef1f4;
+  --surface: #ffffff;
+  --surface-2: #e4e9ee;
+  --fg: #121c26;
+  --muted: #5c6b79;
+  --line: #d3dae1;
+  --accent: #2c5fd6;
+  --housing: #17212b;
+  --lamp-off: #2b3844;
+  --up: #14935a;
+  --down: #d1403a;
+  --mid: #c98b0e;
+  --up-soft: #d9f0e5;
+  --down-soft: #f9dcda;
+  --mid-soft: #f6e8c9;
+  --font-body: 'IBM Plex Sans', 'PingFang HK', 'Noto Sans TC', 'Microsoft JhengHei', system-ui, sans-serif;
+  --font-num: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1318; --surface: #151d25; --surface-2: #1d2832; --fg: #e8edf1; --muted: #8fa0af;
+    --line: #26323d; --accent: #7fa3ff; --housing: #070b0f; --lamp-off: #1f2a34;
+    --up: #34c07f; --down: #ef6a63; --mid: #e3b04a;
+    --up-soft: #113626; --down-soft: #3d1a19; --mid-soft: #3a2d10;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1318; --surface: #151d25; --surface-2: #1d2832; --fg: #e8edf1; --muted: #8fa0af;
+  --line: #26323d; --accent: #7fa3ff; --housing: #070b0f; --lamp-off: #1f2a34;
+  --up: #34c07f; --down: #ef6a63; --mid: #e3b04a;
+  --up-soft: #113626; --down-soft: #3d1a19; --mid-soft: #3a2d10;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 14px; line-height: 1.45;
+  padding-block: 14px 28px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+
+header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+h1 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 0.01em; }
+.asof { font-size: 12px; color: var(--muted); }
+.asof b { color: var(--fg); font-weight: 500; }
+
+/* Signal lamp */
+.signal { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: flex; gap: 16px; align-items: center; }
+.housing { background: var(--housing); border-radius: 36px; padding: 10px 8px; display: flex; flex-direction: column; gap: 8px; flex: none; }
+.lamp { width: 34px; height: 34px; border-radius: 50%; background: var(--lamp-off); transition: background .2s, box-shadow .2s; }
+.lamp.on.g { background: var(--up); box-shadow: 0 0 18px 3px var(--up); }
+.lamp.on.y { background: var(--mid); box-shadow: 0 0 18px 3px var(--mid); }
+.lamp.on.r { background: var(--down); box-shadow: 0 0 18px 3px var(--down); }
+.verdict { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.verdict .label { font-size: 34px; font-weight: 600; line-height: 1.05; letter-spacing: 0.02em; }
+.verdict .label.g { color: var(--up); } .verdict .label.y { color: var(--mid); } .verdict .label.r { color: var(--down); }
+.verdict .why { font-size: 13px; color: var(--muted); }
+.verdict .rule { font-size: 11px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 6px; margin-top: 2px; }
+
+/* Tiles */
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; min-width: 0; }
+.tile .k { font-size: 12px; color: var(--muted); }
+.tile .v { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: 28px; font-weight: 600; line-height: 1.15; margin-top: 2px; }
+.tile .p { font-size: 11px; color: var(--muted); font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.v.up { color: var(--up); } .v.down { color: var(--down); }
+
+/* Panels */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; min-width: 0; }
+.panel h2 { margin: 0 0 8px; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; display: flex; justify-content: space-between; gap: 8px; }
+svg.chart { display: block; width: 100%; height: auto; }
+svg.chart text { font-family: var(--font-num); font-size: 9px; fill: var(--muted); }
+svg.chart .axis { stroke: var(--line); stroke-width: 1; }
+svg.chart .bu { fill: var(--up); } svg.chart .bd { fill: var(--down); }
+.strip { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; margin-top: 10px; }
+.strip i { aspect-ratio: 1; border-radius: 3px; display: block; }
+.strip i.g { background: var(--up); } .strip i.y { background: var(--mid); } .strip i.r { background: var(--down); }
+.legend { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+/* Folded detail */
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+summary { list-style: none; cursor: pointer; padding: 12px; font-size: 13px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "展開"; font-size: 12px; color: var(--accent); font-weight: 400; }
+details[open] summary::after { content: "收埋"; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 12px; }
+.sec { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.sec div { padding: 9px 12px; border-bottom: 1px solid var(--line); min-width: 0; }
+.sec div:nth-child(odd) { border-right: 1px solid var(--line); }
+.sec .k { font-size: 11px; color: var(--muted); }
+.sec .v { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 500; }
+.sec .v small { color: var(--muted); font-weight: 400; font-size: 11px; }
+.scroll { overflow-x: auto; border-top: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: 12px; }
+th, td { padding: 7px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+th { font-family: var(--font-body); font-weight: 500; color: var(--muted); font-size: 11px; background: var(--surface-2); }
+th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); }
+th:first-child { background: var(--surface-2); }
+td .d { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+td .d.g { background: var(--up); } td .d.y { background: var(--mid); } td .d.r { background: var(--down); }
+td.up { color: var(--up); } td.down { color: var(--down); }
+.foot { font-size: 11px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Market Monitor 速覽</h1>
+    <div class="asof">數據日期 <b class="num" id="asof">–</b> · <span id="src">載入中</span></div>
+  </header>
+
+  <section class="signal" aria-live="polite">
+    <div class="housing" aria-hidden="true">
+      <div class="lamp" id="lg"></div>
+      <div class="lamp" id="ly"></div>
+      <div class="lamp" id="lr"></div>
+    </div>
+    <div class="verdict">
+      <div class="label" id="vlabel">–</div>
+      <div class="why num" id="vwhy">–</div>
+      <div class="rule" id="vrule">燈號規則：季升 25%+ 股數多過季跌 25%+ 為綠，少過為紅，相等為黃。</div>
+    </div>
+  </section>
+
+  <section class="tiles">
+    <div class="tile"><div class="k">今日升 4%+</div><div class="v up" id="t-up">–</div><div class="p" id="p-up"></div></div>
+    <div class="tile"><div class="k">今日跌 4%+</div><div class="v down" id="t-dn">–</div><div class="p" id="p-dn"></div></div>
+    <div class="tile"><div class="k">5 日比率</div><div class="v" id="t-r5">–</div><div class="p" id="p-r5"></div></div>
+    <div class="tile"><div class="k">10 日比率</div><div class="v" id="t-r10">–</div><div class="p" id="p-r10"></div></div>
+  </section>
+
+  <section class="panel">
+    <h2><span>近 20 日 4%+ 升跌股數</span><span class="num" id="chartmax"></span></h2>
+    <svg class="chart" id="chart" viewBox="0 0 340 130" role="img" aria-label="近 20 日每日升 4% 以上與跌 4% 以上股數"></svg>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <div class="legend"><span id="d0"></span><span>每格 = 一個交易日的燈號</span><span id="d1"></span></div>
+  </section>
+
+  <details>
+    <summary>次要指標</summary>
+    <div class="sec" id="sec"></div>
+  </details>
+
+  <details>
+    <summary>近 20 日明細</summary>
+    <div class="scroll"><table id="tbl"></table></div>
+  </details>
+
+  <div class="foot">數據來自 Stockbee Market Monitor 公開表格，只供自己參考。</div>
+</div>
+
+<script>
+(function () {
+  var SHEET = '1O6OhS7ciA8zwfycBfGPbP2fWJnR0pn2UUvFZVDP9jpE';
+  var GID = '1082103394';
+  // date, up4, dn4, r5, r10, q25up, q25dn, m25up, m25dn, m50up, m50dn, d34up, d34dn, t2108, sp
+  var SAMPLE = [
+    ['8/14/2026',234,147,1.55,2.16,1648,991,290,100,53,29,2043,1255,54.54,7785.76],
+    ['8/13/2026',345,167,1.83,2.05,1630,1007,271,101,45,31,2027,1304,55.02,7798.99],
+    ['8/12/2026',297,172,1.59,2.08,1573,1011,222,125,39,33,2026,1308,52.04,7748.50],
+    ['8/11/2026',259,181,1.51,1.67,1552,1040,226,131,42,36,2013,1331,50.69,7728.20],
+    ['8/10/2026',310,266,2.06,1.56,1488,1049,215,132,34,38,2006,1360,51.06,7753.11],
+    ['8/7/2026',510,152,2.85,1.64,1540,1051,189,123,27,34,2111,1308,53.58,7757.64],
+    ['8/6/2026',300,280,2.28,1.37,1410,1087,127,149,23,37,1972,1384,52.52,7709.96],
+    ['8/5/2026',264,210,2.71,1.28,1445,1080,144,125,20,34,2045,1342,54.37,7723.55],
+    ['8/4/2026',725,115,1.82,1.23,1496,1057,112,109,19,29,2152,1319,55.76,7736.52],
+    ['8/3/2026',579,76,1.20,1.13,1305,1164,79,162,16,36,1811,1481,52.78,7600.50],
+    ['7/31/2026',179,216,0.98,0.91,1171,1235,74,206,13,33,1500,1644,47.36,7489.72],
+    ['7/30/2026',437,189,0.88,0.91,1213,1196,81,266,15,35,1549,1594,47.50,7437.63],
+    ['7/29/2026',165,552,0.65,0.76,1172,1304,108,370,14,54,1457,1702,48.33,7316.15],
+    ['7/28/2026',341,388,0.78,0.88,1261,1231,82,293,8,42,1617,1563,55.33,7428.78],
+    ['7/27/2026',380,195,1.05,0.90,1186,1199,57,200,8,38,1555,1574,53.38,7413.18],
+    ['7/24/2026',144,349,0.83,0.76,1073,1272,67,193,10,37,1425,1704,51.00,7411.98],
+    ['7/23/2026',138,325,0.97,0.80,1079,1233,77,151,17,35,1438,1722,47.17,7408.30],
+    ['7/22/2026',164,242,0.91,0.92,1156,1183,101,170,23,38,1670,1609,51.44,7498.96],
+    ['7/21/2026',473,132,1.00,0.91,1225,1150,144,181,26,40,1758,1552,50.88,7509.20],
+    ['7/20/2026',132,215,0.77,0.69,1189,1244,142,263,29,46,1642,1679,49.35,7443.28],
+    ['7/17/2026',138,166,0.70,0.75,1269,1225,182,230,37,40,1732,1626,53.50,7457.69],
+    ['7/16/2026',254,516,0.68,0.74,1347,1204,168,228,34,39,1872,1615,56.57,7533.77],
+    ['7/15/2026',235,205,0.93,0.87,1360,1137,161,179,33,36,1744,1567,53.83,7572.40],
+    ['7/14/2026',233,188,0.81,0.92,1373,1141,164,142,33,34,1668,1609,52.39,7543.59],
+    ['7/13/2026',207,458,0.63,0.96,1370,1160,162,161,30,38,1733,1621,52.53,7515.34]
+  ];
+
+  // Signal rule lives here so it can be swapped in one place.
+  // Rule: stocks up 25%+ in a quarter vs stocks down 25%+ in a quarter.
+  function signal(r) {
+    if (r[5] > r[6]) return 'g';
+    if (r[5] < r[6]) return 'r';
+    return 'y';
+  }
+  var NAME = { g: '偏多', y: '分歧', r: '偏空' };
+
+  function $(id) { return document.getElementById(id); }
+  function fmt(n) { return Number(n).toLocaleString('en-US'); }
+  function f2(n) { return Number(n).toFixed(2); }
+
+  function parseCSV(text) {
+    var rows = [], row = [], cell = '', q = false, i, c;
+    for (i = 0; i < text.length; i++) {
+      c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; }
+        else cell += c;
+      } else if (c === '"') q = true;
+      else if (c === ',') { row.push(cell); cell = ''; }
+      else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
+      else if (c !== '\r') cell += c;
+    }
+    if (cell || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  function toRows(csv) {
+    var out = [];
+    parseCSV(csv).forEach(function (r) {
+      if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test((r[0] || '').trim())) return;
+      var n = [r[0].trim()];
+      for (var i = 1; i < 16; i++) n.push(parseFloat(String(r[i] || '').replace(/,/g, '')));
+      // sheet has a "universe" column at index 13; drop it to match SAMPLE layout
+      out.push(n.slice(0, 13).concat([n[14], n[15]]));
+    });
+    return out;
+  }
+
+  function render(data, live) {
+    var d = data.slice(0, 20), t = d[0], y = d[1] || t, s = signal(t);
+    $('asof').textContent = t[0];
+    $('src').textContent = live ? '實時' : '示例數據';
+
+    ['g', 'y', 'r'].forEach(function (k) {
+      var el = $({ g: 'lg', y: 'ly', r: 'lr' }[k]);
+      el.className = 'lamp ' + k + (k === s ? ' on' : '');
+    });
+    var lab = $('vlabel'); lab.textContent = NAME[s]; lab.className = 'label ' + s;
+    $('vwhy').textContent = '季升25%+ ' + fmt(t[5]) + ' vs 季跌25%+ ' + fmt(t[6]);
+
+    $('t-up').textContent = fmt(t[1]); $('p-up').textContent = '昨日 ' + fmt(y[1]);
+    $('t-dn').textContent = fmt(t[2]); $('p-dn').textContent = '昨日 ' + fmt(y[2]);
+    var r5 = $('t-r5'), r10 = $('t-r10');
+    r5.textContent = f2(t[3]); r5.className = 'v ' + (t[3] >= 1 ? 'up' : 'down'); $('p-r5').textContent = '昨日 ' + f2(y[3]);
+    r10.textContent = f2(t[4]); r10.className = 'v ' + (t[4] >= 1 ? 'up' : 'down'); $('p-r10').textContent = '昨日 ' + f2(y[4]);
+
+    // chart: oldest on the left, up bars above the axis, down bars below
+    var ch = d.slice().reverse(), W = 340, H = 130, mid = 65, half = 56;
+    var max = Math.max.apply(null, ch.map(function (r) { return Math.max(r[1], r[2]); }));
+    var step = W / ch.length, bw = Math.max(6, step - 5), g = '';
+    g += '<line class="axis" x1="0" x2="' + W + '" y1="' + mid + '" y2="' + mid + '"/>';
+    ch.forEach(function (r, i) {
+      var x = i * step + (step - bw) / 2, hu = r[1] / max * half, hd = r[2] / max * half;
+      g += '<rect class="bu" x="' + x.toFixed(1) + '" y="' + (mid - hu).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + hu.toFixed(1) + '" rx="1.5"/>';
+      g += '<rect class="bd" x="' + x.toFixed(1) + '" y="' + (mid + 1).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + hd.toFixed(1) + '" rx="1.5"/>';
+    });
+    $('chart').innerHTML = g;
+    $('chartmax').textContent = '最高 ' + fmt(max);
+
+    $('strip').innerHTML = ch.map(function (r) { return '<i class="' + signal(r) + '" title="' + r[0] + '"></i>'; }).join('');
+    $('d0').textContent = ch[0][0].replace(/\/2026$/, '');
+    $('d1').textContent = ch[ch.length - 1][0].replace(/\/2026$/, '');
+
+    var sec = [
+      ['T2108', f2(t[13]) + '%'],
+      ['S&P', fmt(t[14])],
+      ['季升 25%+', fmt(t[5])],
+      ['季跌 25%+', fmt(t[6])],
+      ['月升 25%+', fmt(t[7])],
+      ['月跌 25%+', fmt(t[8])],
+      ['月升 50%+', fmt(t[9])],
+      ['月跌 50%+', fmt(t[10])],
+      ['34 日升 13%+', fmt(t[11])],
+      ['34 日跌 13%+', fmt(t[12])]
+    ];
+    $('sec').innerHTML = sec.map(function (p) { return '<div><div class="k">' + p[0] + '</div><div class="v">' + p[1] + '</div></div>'; }).join('');
+
+    var th = '<tr><th>日期</th><th>升4%</th><th>跌4%</th><th>5日</th><th>10日</th><th>T2108</th><th>S&amp;P</th></tr>';
+    var tb = d.map(function (r) {
+      return '<tr><td><span class="d ' + signal(r) + '"></span>' + r[0].replace(/\/2026$/, '') + '</td>' +
+        '<td class="up">' + fmt(r[1]) + '</td><td class="down">' + fmt(r[2]) + '</td>' +
+        '<td class="' + (r[3] >= 1 ? 'up' : 'down') + '">' + f2(r[3]) + '</td>' +
+        '<td class="' + (r[4] >= 1 ? 'up' : 'down') + '">' + f2(r[4]) + '</td>' +
+        '<td>' + f2(r[13]) + '</td><td>' + fmt(r[14]) + '</td></tr>';
+    }).join('');
+    $('tbl').innerHTML = th + tb;
+  }
+
+  render(SAMPLE, false);
+
+  // Live data: works when this file is opened from your own hosting; the preview sandbox blocks it and keeps the sample.
+  try {
+    fetch('https://docs.google.com/spreadsheets/d/' + SHEET + '/gviz/tq?tqx=out:csv&gid=' + GID)
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (txt) { var rows = toRows(txt); if (rows.length > 20) render(rows, true); })
+      .catch(function () {});
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
