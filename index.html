@@ -152,8 +152,23 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 }
 .tab.on { color: var(--fg); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); }
 .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-.view { display: flex; flex-direction: column; gap: 12px; }
-.view[hidden] { display: none !important; }
+.pager { overflow: hidden; width: 100%; }
+.pager-track {
+  display: flex;
+  width: 200%;
+  will-change: transform;
+  transition: transform 0.28s ease;
+}
+.pager-track.dragging { transition: none; }
+.view {
+  box-sizing: border-box;
+  flex: 0 0 50%;
+  width: 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .stock-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .stock-name { font-size: 15px; font-weight: 600; }
@@ -206,6 +221,8 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 
   <div class="foot" id="err" hidden></div>
 
+  <div class="pager" id="pager">
+  <div class="pager-track" id="pager-track">
   <div class="view" id="view-lamp">
   <section class="signal" aria-live="polite">
     <div class="housing" aria-hidden="true">
@@ -247,10 +264,12 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   <div class="foot">數據來自 Stockbee Market Monitor 公開表格，只供自己參考。</div>
   </div>
 
-  <div class="view" id="view-earn" hidden>
+  <div class="view" id="view-earn">
     <div id="earn-list"></div>
     <div class="foot" id="earn-err" hidden></div>
     <div class="foot">數據由業績期追蹤整理，只供自己參考。</div>
+  </div>
+  </div>
   </div>
 </div>
 
@@ -448,6 +467,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   render = function (data, live) {
     origRender(data, live);
     lampAsof = { k: '數據日期', d: $('asof').textContent, s: $('src').textContent };
+    if (currentTab === 'lamp') syncPagerHeight();
   };
   var origShowError = showError;
   showError = function (msg) {
@@ -479,18 +499,98 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     }
   }
 
-  function showTab(name) {
+  function tabIndex() { return currentTab === 'earn' ? 1 : 0; }
+
+  function pagerWidth() { return $('pager').getBoundingClientRect().width; }
+
+  function syncPagerHeight() {
+    var view = currentTab === 'earn' ? $('view-earn') : $('view-lamp');
+    $('pager').style.height = view.offsetHeight + 'px';
+  }
+
+  function slideTo(idx, instant) {
+    var track = $('pager-track');
+    if (instant) track.classList.add('dragging');
+    else track.classList.remove('dragging');
+    track.style.transform = 'translate3d(' + (-idx * pagerWidth()) + 'px,0,0)';
+    if (instant) {
+      void track.offsetWidth;
+      track.classList.remove('dragging');
+    }
+    syncPagerHeight();
+  }
+
+  function showTab(name, instant) {
     currentTab = name === 'earn' ? 'earn' : 'lamp';
     $('tab-lamp').className = 'tab' + (currentTab === 'lamp' ? ' on' : '');
     $('tab-earn').className = 'tab' + (currentTab === 'earn' ? ' on' : '');
     $('tab-lamp').setAttribute('aria-selected', currentTab === 'lamp' ? 'true' : 'false');
     $('tab-earn').setAttribute('aria-selected', currentTab === 'earn' ? 'true' : 'false');
-    $('view-lamp').hidden = currentTab !== 'lamp';
-    $('view-earn').hidden = currentTab !== 'earn';
     applyHeader();
+    slideTo(tabIndex(), !!instant);
     var hash = currentTab === 'earn' ? '#業績' : '#燈號';
     if (decodeURIComponent(location.hash || '') !== hash) history.replaceState(null, '', hash);
   }
+
+  function inHScroll(el) {
+    var n = el;
+    while (n && n !== $('pager')) {
+      if (n.classList && n.classList.contains('scroll')) return true;
+      if (n.scrollWidth && n.clientWidth && n.scrollWidth > n.clientWidth + 1) return true;
+      n = n.parentNode;
+    }
+    return false;
+  }
+
+  (function bindSwipe() {
+    var startX = 0, startY = 0, startT = 0, locked = null, dragging = false;
+    var pager = $('pager'), track = $('pager-track');
+
+    pager.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) { dragging = false; locked = null; return; }
+      if (inHScroll(e.target)) { dragging = false; return; }
+      var t = e.touches[0];
+      startX = t.clientX; startY = t.clientY; startT = Date.now();
+      locked = null; dragging = true;
+    }, { passive: true });
+
+    pager.addEventListener('touchmove', function (e) {
+      if (!dragging || e.touches.length !== 1) return;
+      var t = e.touches[0];
+      var dx = t.clientX - startX, dy = t.clientY - startY;
+      if (locked === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+        locked = Math.abs(dx) > Math.abs(dy) * 1.15 ? 'h' : 'v';
+        if (locked === 'v') dragging = false;
+      }
+      if (locked !== 'h') return;
+      if (e.cancelable) e.preventDefault();
+      var w = pagerWidth(), idx = tabIndex(), x = -idx * w + dx;
+      if ((idx === 0 && dx > 0) || (idx === 1 && dx < 0)) x = -idx * w + dx * 0.28;
+      track.classList.add('dragging');
+      track.style.transform = 'translate3d(' + x + 'px,0,0)';
+    }, { passive: false });
+
+    function endSwipe(e) {
+      if (!dragging) return;
+      var t = (e.changedTouches && e.changedTouches[0]) || {};
+      var dx = (t.clientX || startX) - startX;
+      var wasH = locked === 'h';
+      dragging = false; locked = null;
+      if (!wasH) return;
+      var w = pagerWidth();
+      var flick = Date.now() - startT < 280 && Math.abs(dx) > 40;
+      var far = Math.abs(dx) > w * 0.22;
+      if ((flick || far) && dx < 0 && tabIndex() === 0) showTab('earn');
+      else if ((flick || far) && dx > 0 && tabIndex() === 1) showTab('lamp');
+      else showTab(currentTab);
+    }
+    pager.addEventListener('touchend', endSwipe);
+    pager.addEventListener('touchcancel', endSwipe);
+  })();
+
+  window.addEventListener('resize', function () { slideTo(tabIndex(), true); });
+  $('view-lamp').addEventListener('toggle', syncPagerHeight, true);
+  $('view-earn').addEventListener('toggle', syncPagerHeight, true);
 
   function renderEarn(data) {
     earnData = data;
@@ -533,6 +633,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     }
     el.innerHTML = html;
     if (currentTab === 'earn') applyHeader();
+    syncPagerHeight();
   }
 
   function showEarnError(msg) {
@@ -570,7 +671,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   window.addEventListener('hashchange', function () {
     showTab(decodeURIComponent(location.hash) === '#業績' ? 'earn' : 'lamp');
   });
-  if (decodeURIComponent(location.hash) === '#業績') showTab('earn');
+  if (decodeURIComponent(location.hash) === '#業績') showTab('earn', true);
 
   $('refresh').addEventListener('click', function () {
     this.disabled = true;
