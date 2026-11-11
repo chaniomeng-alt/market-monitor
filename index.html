@@ -80,7 +80,14 @@ h1 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 0.01em; }
 .verdict .label { font-size: 34px; font-weight: 600; line-height: 1.05; letter-spacing: 0.02em; }
 .verdict .label.g { color: var(--up); } .verdict .label.y { color: var(--mid); } .verdict .label.r { color: var(--down); }
 .verdict .why { font-size: 13px; color: var(--muted); }
+.verdict .hint { font-size: 12px; color: var(--muted); }
+.verdict .hint.change { color: var(--fg); font-weight: 500; }
 .verdict .rule { font-size: 11px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 6px; margin-top: 2px; }
+.lamp.on.flash { animation: lamp-flash 0.8s ease-in-out 3; }
+@keyframes lamp-flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.45); }
+}
 
 /* Tiles */
 .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -124,6 +131,7 @@ th:first-child { background: var(--surface-2); }
 td .d { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
 td .d.g { background: var(--up); } td .d.y { background: var(--mid); } td .d.r { background: var(--down); }
 td.up { color: var(--up); } td.down { color: var(--down); }
+.tag-ch { font-family: var(--font-body); font-size: 10px; color: var(--accent); margin-left: 4px; font-weight: 500; }
 .foot { font-size: 11px; color: var(--muted); text-align: center; }
 </style>
 </head>
@@ -146,6 +154,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     <div class="verdict">
       <div class="label" id="vlabel">–</div>
       <div class="why num" id="vwhy">–</div>
+      <div class="hint" id="vhint"></div>
       <div class="rule" id="vrule">燈號規則：季升 25%+ 股數多過季跌 25%+ 為綠，少過為紅，相等為黃。</div>
     </div>
   </section>
@@ -170,7 +179,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   </details>
 
   <details>
-    <summary>近 20 日明細</summary>
+    <summary><span>歷史明細 <span class="num" id="histn"></span></span></summary>
     <div class="scroll"><table id="tbl"></table></div>
   </details>
 
@@ -193,6 +202,20 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   function $(id) { return document.getElementById(id); }
   function fmt(n) { return Number(n).toLocaleString('en-US'); }
   function f2(n) { return Number(n).toFixed(2); }
+  function fmtDelta(n) {
+    var sign = n > 0 ? '+' : (n < 0 ? '−' : '');
+    return sign + fmt(Math.abs(n));
+  }
+  function yearOf(d) {
+    var m = /\/(\d{4})$/.exec(d || '');
+    return m ? m[1] : '';
+  }
+  function fmtDate(s, refYear) {
+    var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s || '');
+    if (!m) return s || '';
+    if (refYear && m[3] === refYear) return m[1] + '/' + m[2];
+    return m[1] + '/' + m[2] + '/' + m[3].slice(2);
+  }
 
   function parseCSV(text) {
     var rows = [], row = [], cell = '', q = false, i, c;
@@ -232,15 +255,35 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     $('err').hidden = true;
     $('err').textContent = '';
     var d = data.slice(0, 20), t = d[0], y = d[1] || t, s = signal(t);
+    var refY = yearOf(t[0]);
+    var margin = t[5] - t[6];
+    var todayChanged = data.length > 1 && s !== signal(data[1]);
     $('asof').textContent = t[0];
     $('src').textContent = live ? '實時' : '示例數據';
 
     ['g', 'y', 'r'].forEach(function (k) {
       var el = $({ g: 'lg', y: 'ly', r: 'lr' }[k]);
-      el.className = 'lamp ' + k + (k === s ? ' on' : '');
+      el.className = 'lamp ' + k + (k === s ? ' on' : '') + (k === s && todayChanged ? ' flash' : '');
     });
     var lab = $('vlabel'); lab.textContent = NAME[s]; lab.className = 'label ' + s;
-    $('vwhy').textContent = '季升25%+ ' + fmt(t[5]) + ' vs 季跌25%+ ' + fmt(t[6]);
+    $('vwhy').textContent = '季升25%+ ' + fmt(t[5]) + ' vs 季跌25%+ ' + fmt(t[6]) + '（邊際 ' + fmtDelta(margin) + '）';
+
+    var hint = $('vhint');
+    var streak = 1, prevSig = null, changeDate = '';
+    for (var i = 1; i < data.length; i++) {
+      if (signal(data[i]) === s) streak++;
+      else { prevSig = signal(data[i]); changeDate = data[i - 1][0]; break; }
+    }
+    if (todayChanged) {
+      hint.textContent = '今日由' + NAME[signal(data[1])] + '轉為' + NAME[s];
+      hint.className = 'hint change';
+    } else if (prevSig) {
+      hint.textContent = NAME[s] + '已連續 ' + streak + ' 日。上次轉色：' + fmtDate(changeDate, refY) + '，由' + NAME[prevSig] + '轉為' + NAME[s];
+      hint.className = 'hint';
+    } else {
+      hint.textContent = NAME[s] + '已連續 ' + streak + ' 日';
+      hint.className = 'hint';
+    }
 
     $('t-up').textContent = fmt(t[1]); $('p-up').textContent = '昨日 ' + fmt(y[1]);
     $('t-dn').textContent = fmt(t[2]); $('p-dn').textContent = '昨日 ' + fmt(y[2]);
@@ -262,29 +305,38 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     $('chartmax').textContent = '最高 ' + fmt(max);
 
     $('strip').innerHTML = ch.map(function (r) { return '<i class="' + signal(r) + '" title="' + r[0] + '"></i>'; }).join('');
-    $('d0').textContent = ch[0][0].replace(/\/2026$/, '');
-    $('d1').textContent = ch[ch.length - 1][0].replace(/\/2026$/, '');
+    $('d0').textContent = fmtDate(ch[0][0], refY);
+    $('d1').textContent = fmtDate(ch[ch.length - 1][0], refY);
 
     var sec = [
-      ['T2108', f2(t[13]) + '%'],
-      ['S&P', fmt(t[14])],
-      ['季升 25%+', fmt(t[5])],
-      ['季跌 25%+', fmt(t[6])],
-      ['月升 25%+', fmt(t[7])],
-      ['月跌 25%+', fmt(t[8])],
-      ['月升 50%+', fmt(t[9])],
-      ['月跌 50%+', fmt(t[10])],
-      ['34 日升 13%+', fmt(t[11])],
-      ['34 日跌 13%+', fmt(t[12])]
+      ['綠燈邊際（季升−季跌）', fmtDelta(margin), margin >= 0 ? 'up' : 'down'],
+      ['T2108', f2(t[13]) + '%', ''],
+      ['S&P', fmt(t[14]), ''],
+      ['季升 25%+', fmt(t[5]), ''],
+      ['季跌 25%+', fmt(t[6]), ''],
+      ['月升 25%+', fmt(t[7]), ''],
+      ['月跌 25%+', fmt(t[8]), ''],
+      ['月升 50%+', fmt(t[9]), ''],
+      ['月跌 50%+', fmt(t[10]), ''],
+      ['34 日升 13%+', fmt(t[11]), ''],
+      ['34 日跌 13%+', fmt(t[12]), '']
     ];
-    $('sec').innerHTML = sec.map(function (p) { return '<div><div class="k">' + p[0] + '</div><div class="v">' + p[1] + '</div></div>'; }).join('');
+    $('sec').innerHTML = sec.map(function (p) {
+      return '<div><div class="k">' + p[0] + '</div><div class="v' + (p[2] ? ' ' + p[2] : '') + '">' + p[1] + '</div></div>';
+    }).join('');
 
-    var th = '<tr><th>日期</th><th>升4%</th><th>跌4%</th><th>5日</th><th>10日</th><th>T2108</th><th>S&amp;P</th></tr>';
-    var tb = d.map(function (r) {
-      return '<tr><td><span class="d ' + signal(r) + '"></span>' + r[0].replace(/\/2026$/, '') + '</td>' +
+    $('histn').textContent = '（' + data.length + ' 日）';
+    var th = '<tr><th>日期</th><th>升4%</th><th>跌4%</th><th>5日</th><th>10日</th><th>邊際</th><th>T2108</th><th>S&amp;P</th></tr>';
+    var tb = data.map(function (r, i) {
+      var rs = signal(r);
+      var ch = (i + 1 < data.length && rs !== signal(data[i + 1]));
+      var m = r[5] - r[6];
+      return '<tr' + (ch ? ' class="chg"' : '') + '><td><span class="d ' + rs + '"></span>' + fmtDate(r[0], refY) +
+        (ch ? '<span class="tag-ch">轉</span>' : '') + '</td>' +
         '<td class="up">' + fmt(r[1]) + '</td><td class="down">' + fmt(r[2]) + '</td>' +
         '<td class="' + (r[3] >= 1 ? 'up' : 'down') + '">' + f2(r[3]) + '</td>' +
         '<td class="' + (r[4] >= 1 ? 'up' : 'down') + '">' + f2(r[4]) + '</td>' +
+        '<td class="' + (m >= 0 ? 'up' : 'down') + '">' + fmtDelta(m) + '</td>' +
         '<td>' + f2(r[13]) + '</td><td>' + fmt(r[14]) + '</td></tr>';
     }).join('');
     $('tbl').innerHTML = th + tb;
