@@ -1,0 +1,21 @@
+{
+  "name": "Market Monitor 速覽",
+  "short_name": "MM 速覽",
+  "start_url": "/market-monitor/",
+  "scope": "/market-monitor/",
+  "display": "standalone",
+  "background_color": "#0d1318",
+  "theme_color": "#0d1318",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
