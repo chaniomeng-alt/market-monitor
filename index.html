@@ -126,6 +126,8 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     <div class="asof">數據日期 <b class="num" id="asof">–</b> · <span id="src">載入中</span></div>
   </header>
 
+  <div class="foot" id="err" hidden></div>
+
   <section class="signal" aria-live="polite">
     <div class="housing" aria-hidden="true">
       <div class="lamp" id="lg"></div>
@@ -170,35 +172,6 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 (function () {
   var SHEET = '1O6OhS7ciA8zwfycBfGPbP2fWJnR0pn2UUvFZVDP9jpE';
   var GID = '1082103394';
-  // date, up4, dn4, r5, r10, q25up, q25dn, m25up, m25dn, m50up, m50dn, d34up, d34dn, t2108, sp
-  var SAMPLE = [
-    ['8/14/2026',234,147,1.55,2.16,1648,991,290,100,53,29,2043,1255,54.54,7785.76],
-    ['8/13/2026',345,167,1.83,2.05,1630,1007,271,101,45,31,2027,1304,55.02,7798.99],
-    ['8/12/2026',297,172,1.59,2.08,1573,1011,222,125,39,33,2026,1308,52.04,7748.50],
-    ['8/11/2026',259,181,1.51,1.67,1552,1040,226,131,42,36,2013,1331,50.69,7728.20],
-    ['8/10/2026',310,266,2.06,1.56,1488,1049,215,132,34,38,2006,1360,51.06,7753.11],
-    ['8/7/2026',510,152,2.85,1.64,1540,1051,189,123,27,34,2111,1308,53.58,7757.64],
-    ['8/6/2026',300,280,2.28,1.37,1410,1087,127,149,23,37,1972,1384,52.52,7709.96],
-    ['8/5/2026',264,210,2.71,1.28,1445,1080,144,125,20,34,2045,1342,54.37,7723.55],
-    ['8/4/2026',725,115,1.82,1.23,1496,1057,112,109,19,29,2152,1319,55.76,7736.52],
-    ['8/3/2026',579,76,1.20,1.13,1305,1164,79,162,16,36,1811,1481,52.78,7600.50],
-    ['7/31/2026',179,216,0.98,0.91,1171,1235,74,206,13,33,1500,1644,47.36,7489.72],
-    ['7/30/2026',437,189,0.88,0.91,1213,1196,81,266,15,35,1549,1594,47.50,7437.63],
-    ['7/29/2026',165,552,0.65,0.76,1172,1304,108,370,14,54,1457,1702,48.33,7316.15],
-    ['7/28/2026',341,388,0.78,0.88,1261,1231,82,293,8,42,1617,1563,55.33,7428.78],
-    ['7/27/2026',380,195,1.05,0.90,1186,1199,57,200,8,38,1555,1574,53.38,7413.18],
-    ['7/24/2026',144,349,0.83,0.76,1073,1272,67,193,10,37,1425,1704,51.00,7411.98],
-    ['7/23/2026',138,325,0.97,0.80,1079,1233,77,151,17,35,1438,1722,47.17,7408.30],
-    ['7/22/2026',164,242,0.91,0.92,1156,1183,101,170,23,38,1670,1609,51.44,7498.96],
-    ['7/21/2026',473,132,1.00,0.91,1225,1150,144,181,26,40,1758,1552,50.88,7509.20],
-    ['7/20/2026',132,215,0.77,0.69,1189,1244,142,263,29,46,1642,1679,49.35,7443.28],
-    ['7/17/2026',138,166,0.70,0.75,1269,1225,182,230,37,40,1732,1626,53.50,7457.69],
-    ['7/16/2026',254,516,0.68,0.74,1347,1204,168,228,34,39,1872,1615,56.57,7533.77],
-    ['7/15/2026',235,205,0.93,0.87,1360,1137,161,179,33,36,1744,1567,53.83,7572.40],
-    ['7/14/2026',233,188,0.81,0.92,1373,1141,164,142,33,34,1668,1609,52.39,7543.59],
-    ['7/13/2026',207,458,0.63,0.96,1370,1160,162,161,30,38,1733,1621,52.53,7515.34]
-  ];
-
   // Signal rule lives here so it can be swapped in one place.
   // Rule: stocks up 25%+ in a quarter vs stocks down 25%+ in a quarter.
   function signal(r) {
@@ -233,13 +206,22 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test((r[0] || '').trim())) return;
       var n = [r[0].trim()];
       for (var i = 1; i < 16; i++) n.push(parseFloat(String(r[i] || '').replace(/,/g, '')));
-      // sheet has a "universe" column at index 13; drop it to match SAMPLE layout
+      // sheet has a "universe" column at index 13; drop it to match the row layout
       out.push(n.slice(0, 13).concat([n[14], n[15]]));
     });
     return out;
   }
 
+  function showError(msg) {
+    $('src').textContent = '讀取失敗';
+    var el = $('err');
+    el.hidden = false;
+    el.textContent = msg;
+  }
+
   function render(data, live) {
+    $('err').hidden = true;
+    $('err').textContent = '';
     var d = data.slice(0, 20), t = d[0], y = d[1] || t, s = signal(t);
     $('asof').textContent = t[0];
     $('src').textContent = live ? '實時' : '示例數據';
@@ -299,15 +281,31 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     $('tbl').innerHTML = th + tb;
   }
 
-  render(SAMPLE, false);
-
-  // Live data: works when this file is opened from your own hosting; the preview sandbox blocks it and keeps the sample.
+  // Live data from the public sheet. On failure, show a reason and do not fall back to sample data.
   try {
     fetch('https://docs.google.com/spreadsheets/d/' + SHEET + '/gviz/tq?tqx=out:csv&gid=' + GID)
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
-      .then(function (txt) { var rows = toRows(txt); if (rows.length > 20) render(rows, true); })
-      .catch(function () {});
-  } catch (e) {}
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (txt) {
+        var rows = toRows(txt);
+        if (!rows.length) {
+          showError('讀取失敗：表格沒有有效日期列');
+          return;
+        }
+        render(rows, true);
+      })
+      .catch(function (e) {
+        var m = (e && e.message) ? String(e.message) : '';
+        if (/^HTTP\s+\d+/.test(m)) showError('讀取失敗：' + m);
+        else if (!m || /failed to fetch|networkerror|load failed/i.test(m)) showError('讀取失敗：網絡或跨域限制');
+        else showError('讀取失敗：' + m);
+      });
+  } catch (e) {
+    var m = (e && e.message) ? String(e.message) : '未知錯誤';
+    showError('讀取失敗：' + m);
+  }
 })();
 </script>
 
