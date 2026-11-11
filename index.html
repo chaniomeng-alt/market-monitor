@@ -155,7 +155,6 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       <div class="label" id="vlabel">–</div>
       <div class="why num" id="vwhy">–</div>
       <div class="hint" id="vhint"></div>
-      <div class="rule" id="vrule">燈號規則：季升 25%+ 股數多過季跌 25%+ 為綠，少過為紅，相等為黃。</div>
     </div>
   </section>
 
@@ -309,7 +308,6 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     $('d1').textContent = fmtDate(ch[ch.length - 1][0], refY);
 
     var sec = [
-      ['綠燈邊際（季升−季跌）', fmtDelta(margin), margin >= 0 ? 'up' : 'down'],
       ['T2108', f2(t[13]) + '%', ''],
       ['S&P', fmt(t[14]), ''],
       ['季升 25%+', fmt(t[5]), ''],
@@ -326,17 +324,16 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     }).join('');
 
     $('histn').textContent = '（' + data.length + ' 日）';
-    var th = '<tr><th>日期</th><th>升4%</th><th>跌4%</th><th>5日</th><th>10日</th><th>邊際</th><th>T2108</th><th>S&amp;P</th></tr>';
+    var th = '<tr><th>日期</th><th>升4%</th><th>跌4%</th><th>5日</th><th>10日</th><th>季升</th><th>季減</th><th>T2108</th><th>S&amp;P</th></tr>';
     var tb = data.map(function (r, i) {
       var rs = signal(r);
       var ch = (i + 1 < data.length && rs !== signal(data[i + 1]));
-      var m = r[5] - r[6];
       return '<tr' + (ch ? ' class="chg"' : '') + '><td><span class="d ' + rs + '"></span>' + fmtDate(r[0], refY) +
         (ch ? '<span class="tag-ch">轉</span>' : '') + '</td>' +
         '<td class="up">' + fmt(r[1]) + '</td><td class="down">' + fmt(r[2]) + '</td>' +
         '<td class="' + (r[3] >= 1 ? 'up' : 'down') + '">' + f2(r[3]) + '</td>' +
         '<td class="' + (r[4] >= 1 ? 'up' : 'down') + '">' + f2(r[4]) + '</td>' +
-        '<td class="' + (m >= 0 ? 'up' : 'down') + '">' + fmtDelta(m) + '</td>' +
+        '<td class="up">' + fmt(r[5]) + '</td><td class="down">' + fmt(r[6]) + '</td>' +
         '<td>' + f2(r[13]) + '</td><td>' + fmt(r[14]) + '</td></tr>';
     }).join('');
     $('tbl').innerHTML = th + tb;
