@@ -33,6 +33,7 @@
   --up-soft: #d9f0e5;
   --down-soft: #f9dcda;
   --mid-soft: #f6e8c9;
+  --open: #e8eef4;
   --font-body: 'IBM Plex Sans', 'PingFang HK', 'Noto Sans TC', 'Microsoft JhengHei', system-ui, sans-serif;
   --font-num: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
@@ -42,6 +43,7 @@
     --line: #26323d; --accent: #7fa3ff; --housing: #070b0f; --lamp-off: #1f2a34;
     --up: #34c07f; --down: #ef6a63; --mid: #e3b04a;
     --up-soft: #113626; --down-soft: #3d1a19; --mid-soft: #3a2d10;
+    --open: #1a2430;
     color-scheme: dark;
   }
 }
@@ -50,6 +52,7 @@
   --line: #26323d; --accent: #7fa3ff; --housing: #070b0f; --lamp-off: #1f2a34;
   --up: #34c07f; --down: #ef6a63; --mid: #e3b04a;
   --up-soft: #113626; --down-soft: #3d1a19; --mid-soft: #3a2d10;
+  --open: #1a2430;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -155,15 +158,15 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 .pager { overflow: hidden; width: 100%; }
 .pager-track {
   display: flex;
-  width: 200%;
+  width: 300%;
   will-change: transform;
   transition: transform 0.28s ease;
 }
 .pager-track.dragging { transition: none; }
 .view {
   box-sizing: border-box;
-  flex: 0 0 50%;
-  width: 50%;
+  flex: 0 0 33.333%;
+  width: 33.333%;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -201,6 +204,58 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 .earn-row .nm { font-weight: 500; }
 .earn-row .nt { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .note { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+/* Deemer tab — scoped so lamp history / earnings tags stay unchanged */
+#view-deemer .tile .p { font-family: var(--font-body); }
+#view-deemer .hold-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+#view-deemer .hold-row:first-of-type { padding-top: 0; }
+#view-deemer .hold-row:last-of-type { border-bottom: 0; padding-bottom: 0; }
+#view-deemer .hold-name { font-weight: 600; font-size: 14px; }
+#view-deemer .hold-dtr { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: 16px; font-weight: 600; }
+#view-deemer .list { padding: 0; overflow: hidden; }
+#view-deemer .list h2 { margin: 0; padding: 12px 12px 2px; }
+#view-deemer .list .hint { padding: 0 12px 8px; font-size: 11px; color: var(--muted); }
+#view-deemer .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-top: 1px solid var(--line); }
+#view-deemer table { width: max-content; min-width: 100%; font-size: 11px; }
+#view-deemer th, #view-deemer td { padding: 7px 6px; }
+#view-deemer th { font-size: 10px; line-height: 1.25; }
+#view-deemer th .sub { display: block; color: var(--fg); font-family: var(--font-num); font-size: 10px; font-weight: 500; margin-top: 1px; }
+#view-deemer td.dtr, #view-deemer th.dtr { min-width: 44px; }
+#view-deemer th.rc, #view-deemer td.rc { min-width: 42px; }
+#view-deemer td.px, #view-deemer th.px { min-width: 50px; }
+#view-deemer td.px { color: var(--muted); }
+#view-deemer th:first-child, #view-deemer td:first-child {
+  padding-left: 12px; padding-right: 8px;
+  min-width: 138px; max-width: 138px; white-space: normal;
+}
+#view-deemer th:last-child, #view-deemer td:last-child { padding-right: 12px; }
+#view-deemer tr.hold td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+#view-deemer tr.bench td, #view-deemer tr.bench td:first-child { background: var(--surface-2); }
+#view-deemer tr.open td, #view-deemer tr.open td:first-child { background: var(--open); }
+#view-deemer .name { font-family: var(--font-body); font-weight: 500; font-size: 12px; }
+#view-deemer .nm { white-space: nowrap; }
+#view-deemer .dtag {
+  display: inline-block; font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-radius: 999px; padding: 1px 6px; margin-top: 2px;
+}
+#view-deemer .dtag.ref { color: var(--muted); background: var(--bg); }
+#view-deemer td.dtr0 { font-weight: 600; font-size: 12px; color: var(--fg); }
+#view-deemer tbody tr:not(.detail) { cursor: pointer; }
+#view-deemer tr.detail td {
+  text-align: left; padding: 0; background: var(--open); border-bottom: 1px solid var(--line);
+  white-space: normal; cursor: default;
+}
+#view-deemer .detail-inner { position: sticky; left: 0; width: calc(100vw - 32px); max-width: 520px; box-sizing: border-box; padding: 10px 12px 12px; }
+#view-deemer .detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+#view-deemer .kv .k { font-size: 11px; color: var(--muted); }
+#view-deemer .kv .v { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 500; }
+#view-deemer .kv .v.up { color: var(--up); } #view-deemer .kv .v.down { color: var(--down); }
+#view-deemer .prices { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; font-size: 12px; color: var(--muted); margin-top: 10px; }
+#view-deemer .prices b { color: var(--fg); font-weight: 500; font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+#view-deemer .spark-wrap { margin-top: 10px; }
+#view-deemer .spark-wrap .k { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+#view-deemer .spark { display: block; width: 100%; height: 36px; }
 </style>
 </head>
 <body>
@@ -217,6 +272,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   <nav class="tabs" aria-label="分頁">
     <button type="button" class="tab on" id="tab-lamp" aria-selected="true">燈號</button>
     <button type="button" class="tab" id="tab-earn" aria-selected="false">業績</button>
+    <button type="button" class="tab" id="tab-deemer" aria-selected="false">Deemer</button>
   </nav>
 
   <div class="foot" id="err" hidden></div>
@@ -268,6 +324,12 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     <div id="earn-list"></div>
     <div class="foot" id="earn-err" hidden></div>
     <div class="foot">數據由業績期追蹤整理，只供自己參考。</div>
+  </div>
+
+  <div class="view" id="view-deemer">
+    <div id="deemer-body"></div>
+    <div class="foot" id="deemer-err" hidden></div>
+    <div class="foot">數據來自 Walter Deemer 公開表格，只供自己參考。</div>
   </div>
   </div>
   </div>
@@ -459,21 +521,25 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   }
   function tone(v) { return v === 'up' || v === 'down' || v === 'mid' ? v : ''; }
 
+  var TABS = ['lamp', 'earn', 'deemer'];
+  var TAB_HASH = { lamp: '#燈號', earn: '#業績', deemer: '#deemer' };
   var currentTab = 'lamp';
   var earnData = null;
+  var deemerData = null;
   var lampAsof = { k: '數據日期', d: '–', s: '載入中' };
 
   var origRender = render;
   render = function (data, live) {
     origRender(data, live);
     lampAsof = { k: '數據日期', d: $('asof').textContent, s: $('src').textContent };
+    applyHeader();
     if (currentTab === 'lamp') syncPagerHeight();
   };
   var origShowError = showError;
   showError = function (msg) {
     origShowError(msg);
     lampAsof = { k: '數據日期', d: $('asof').textContent, s: $('src').textContent };
-    if (currentTab === 'earn') $('err').hidden = true;
+    applyHeader();
   };
 
   function applyHeader() {
@@ -490,6 +556,19 @@ td.up { color: var(--up); } td.down { color: var(--down); }
         $('src').textContent = '載入中';
       }
       $('err').hidden = true;
+    } else if (currentTab === 'deemer') {
+      $('asof-k').textContent = '數據日期';
+      if (deemerData) {
+        $('asof').textContent = deemerData.asOfLabel || '–';
+        $('src').textContent = 'Deemer';
+      } else if ($('deemer-err') && !$('deemer-err').hidden && $('deemer-err').textContent) {
+        $('asof').textContent = '–';
+        $('src').textContent = '讀取失敗';
+      } else {
+        $('asof').textContent = '–';
+        $('src').textContent = '載入中';
+      }
+      $('err').hidden = true;
     } else {
       $('asof-k').textContent = lampAsof.k;
       $('asof').textContent = lampAsof.d;
@@ -499,12 +578,12 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     }
   }
 
-  function tabIndex() { return currentTab === 'earn' ? 1 : 0; }
+  function tabIndex() { var i = TABS.indexOf(currentTab); return i < 0 ? 0 : i; }
 
   function pagerWidth() { return $('pager').getBoundingClientRect().width; }
 
   function syncPagerHeight() {
-    var view = currentTab === 'earn' ? $('view-earn') : $('view-lamp');
+    var view = currentTab === 'earn' ? $('view-earn') : (currentTab === 'deemer' ? $('view-deemer') : $('view-lamp'));
     $('pager').style.height = view.offsetHeight + 'px';
   }
 
@@ -521,15 +600,24 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   }
 
   function showTab(name, instant) {
-    currentTab = name === 'earn' ? 'earn' : 'lamp';
-    $('tab-lamp').className = 'tab' + (currentTab === 'lamp' ? ' on' : '');
-    $('tab-earn').className = 'tab' + (currentTab === 'earn' ? ' on' : '');
-    $('tab-lamp').setAttribute('aria-selected', currentTab === 'lamp' ? 'true' : 'false');
-    $('tab-earn').setAttribute('aria-selected', currentTab === 'earn' ? 'true' : 'false');
+    currentTab = TABS.indexOf(name) >= 0 ? name : 'lamp';
+    TABS.forEach(function (id) {
+      var el = $('tab-' + id);
+      var on = currentTab === id;
+      el.className = 'tab' + (on ? ' on' : '');
+      el.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
     applyHeader();
     slideTo(tabIndex(), !!instant);
-    var hash = currentTab === 'earn' ? '#業績' : '#燈號';
+    var hash = TAB_HASH[currentTab] || '#燈號';
     if (decodeURIComponent(location.hash || '') !== hash) history.replaceState(null, '', hash);
+  }
+
+  function tabFromHash() {
+    var h = decodeURIComponent(location.hash || '');
+    if (h === '#業績') return 'earn';
+    if (h.toLowerCase() === '#deemer') return 'deemer';
+    return 'lamp';
   }
 
   function inHScroll(el) {
@@ -565,7 +653,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       if (locked !== 'h') return;
       if (e.cancelable) e.preventDefault();
       var w = pagerWidth(), idx = tabIndex(), x = -idx * w + dx;
-      if ((idx === 0 && dx > 0) || (idx === 1 && dx < 0)) x = -idx * w + dx * 0.28;
+      if ((idx === 0 && dx > 0) || (idx === TABS.length - 1 && dx < 0)) x = -idx * w + dx * 0.28;
       track.classList.add('dragging');
       track.style.transform = 'translate3d(' + x + 'px,0,0)';
     }, { passive: false });
@@ -580,8 +668,9 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       var w = pagerWidth();
       var flick = Date.now() - startT < 280 && Math.abs(dx) > 40;
       var far = Math.abs(dx) > w * 0.22;
-      if ((flick || far) && dx < 0 && tabIndex() === 0) showTab('earn');
-      else if ((flick || far) && dx > 0 && tabIndex() === 1) showTab('lamp');
+      var idx = tabIndex();
+      if ((flick || far) && dx < 0 && idx < TABS.length - 1) showTab(TABS[idx + 1]);
+      else if ((flick || far) && dx > 0 && idx > 0) showTab(TABS[idx - 1]);
       else showTab(currentTab);
     }
     pager.addEventListener('touchend', endSwipe);
@@ -591,6 +680,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
   window.addEventListener('resize', function () { slideTo(tabIndex(), true); });
   $('view-lamp').addEventListener('toggle', syncPagerHeight, true);
   $('view-earn').addEventListener('toggle', syncPagerHeight, true);
+  $('view-deemer').addEventListener('toggle', syncPagerHeight, true);
 
   function renderEarn(data) {
     earnData = data;
@@ -648,6 +738,126 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     }
   }
 
+
+  function rcTxt(n) {
+    n = Number(n);
+    return n > 0 ? '+' + n : (n < 0 ? '−' + Math.abs(n) : '0');
+  }
+  function rcCls(n) {
+    n = Number(n);
+    return n > 0 ? 'up' : (n < 0 ? 'down' : '');
+  }
+  function moneyCents(cents, name) {
+    var n = Number(cents) / 100;
+    var s = n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return name === 'S&P 500' ? s : '$' + s;
+  }
+  function spark(latestFirst) {
+    var vals = latestFirst.slice().reverse();
+    var w = 320, h = 36, pad = 4;
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    if (min === max) { min -= 1; max += 1; }
+    var xs = vals.map(function (_, i) { return pad + i * (w - pad * 2) / (vals.length - 1); });
+    var ys = vals.map(function (v) { return h - pad - (v - min) / (max - min) * (h - pad * 2); });
+    var d = xs.map(function (x, i) { return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + ys[i].toFixed(1); }).join(' ');
+    var last = vals[vals.length - 1] >= vals[0] ? 'var(--up)' : 'var(--down)';
+    var lx = xs[xs.length - 1].toFixed(1), ly = ys[ys.length - 1].toFixed(1);
+    return '<svg class="spark" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true"><path d="' + d + '" fill="none" stroke="' + last + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="' + lx + '" cy="' + ly + '" r="2.4" fill="' + last + '"/></svg>';
+  }
+  function deemerDetail(r, dtrDates, priceDates) {
+    var html = '<div class="detail-inner"><div class="detail-grid">';
+    html += '<div class="kv"><div class="k">週變 R/C</div><div class="v ' + rcCls(r.rc) + '">' + rcTxt(r.rc) + '</div></div>';
+    html += '<div class="kv"><div class="k">今期 DTR</div><div class="v">' + r.dtr[0] + '</div></div>';
+    html += '<div class="kv"><div class="k">上週 DTR</div><div class="v">' + (r.dtr[1] != null ? r.dtr[1] : '–') + '</div></div>';
+    html += '<div class="kv"><div class="k">今期價格</div><div class="v">' + moneyCents(r.prices[0], r.name) + '</div></div>';
+    html += '</div><div class="prices">';
+    priceDates.forEach(function (d, j) {
+      html += '<div>' + esc(d) + '  <b>' + moneyCents(r.prices[j], r.name) + '</b></div>';
+    });
+    html += '</div>';
+    html += '<div class="spark-wrap"><div class="k">5 週 DTR 走勢　' + esc(dtrDates[dtrDates.length - 1]) + ' → ' + esc(dtrDates[0]) + '</div>' + spark(r.dtr) + '</div>';
+    html += '</div>';
+    return html;
+  }
+  function renderDeemer(data) {
+    deemerData = data;
+    var err = $('deemer-err');
+    err.hidden = true;
+    err.textContent = '';
+    var rows = data.rows || [];
+    var dtrDates = data.dtrDates || [];
+    var priceDates = data.priceDates || [];
+    var bc = data.beatCash || {};
+    var spx = data.spx || {};
+    var hi = data.strongestRc || {};
+    var lo = data.weakestRc || {};
+    var holds = rows.filter(function (r) { return r.kind === 'hold'; });
+    var html = '<section class="tiles">';
+    html += '<div class="tile"><div class="k">跑贏現金</div><div class="v">' + esc(String(bc.pct != null ? bc.pct + '%' : '–')) + '</div><div class="p">' + esc(bc.note || '') + '</div></div>';
+    html += '<div class="tile"><div class="k">S&amp;P 今期排名</div><div class="v">' + esc(String(spx.rank != null ? spx.rank : '–')) + '</div>';
+    html += '<div class="p">DTR ' + esc(String(spx.dtr != null ? spx.dtr : '–')) + ' · 週變 ' + rcTxt(spx.rc) + ' · 共 ' + esc(String(spx.total != null ? spx.total : rows.length)) + ' 行</div></div>';
+    html += '<div class="tile"><div class="k">本週轉強</div><div class="v up">' + rcTxt(hi.rc) + '</div><div class="p">' + esc(hi.name || '') + '</div></div>';
+    html += '<div class="tile"><div class="k">本週轉弱</div><div class="v down">' + rcTxt(lo.rc) + '</div><div class="p">' + esc(lo.name || '') + '</div></div>';
+    html += '</section>';
+    html += '<section class="panel"><h2>而家持倉</h2><div class="hold">';
+    if (!holds.length) html += '<div class="note">本週沒有標示持倉。</div>';
+    holds.forEach(function (h) {
+      html += '<div class="hold-row"><span class="hold-name">' + esc(h.name) + '</span><span class="hold-dtr">' + esc(String(h.dtr[0])) + '</span></div>';
+    });
+    html += '</div>';
+    if (data.holdingsNote) html += '<div class="note">' + esc(data.holdingsNote) + '</div>';
+    html += '</section>';
+    var colCount = 2 + dtrDates.length + priceDates.length;
+    html += '<section class="panel list"><h2>DTR 強度排名</h2>';
+    html += '<div class="hint">R/C 在最前，接著是 DTR，價格（分）在最後，可左右滑。撳一行睇詳細。</div>';
+    html += '<div class="scroll"><table><thead><tr><th>板塊</th><th class="rc">R/C</th>';
+    dtrDates.forEach(function (d) { html += '<th class="dtr">DTR<span class="sub">' + esc(d) + '</span></th>'; });
+    priceDates.forEach(function (d) { html += '<th class="px">分<span class="sub">' + esc(d) + '</span></th>'; });
+    html += '</tr></thead><tbody id="deemer-tbl">';
+    rows.forEach(function (r, i) {
+      var cls = (r.kind === 'hold' ? 'hold' : '') + (r.kind === 'bench' ? ' bench' : '');
+      var tag = r.kind === 'hold' ? '<span class="dtag">持倉</span>' : (r.kind === 'bench' ? '<span class="dtag ref">參考</span>' : '');
+      html += '<tr class="' + cls + '" data-i="' + i + '"><td class="name"><span class="nm">' + esc(r.name) + '</span>' + (tag ? '<br>' + tag : '') + '</td>';
+      html += '<td class="rc ' + rcCls(r.rc) + '">' + rcTxt(r.rc) + '</td>';
+      (r.dtr || []).forEach(function (v, j) { html += '<td class="dtr' + (j === 0 ? ' dtr0' : '') + '">' + v + '</td>'; });
+      (r.prices || []).forEach(function (v) { html += '<td class="px">' + v + '</td>'; });
+      html += '</tr>';
+    });
+    html += '</tbody></table></div></section>';
+    $('deemer-body').innerHTML = html;
+    var openI = -1;
+    $('deemer-tbl').addEventListener('click', function (e) {
+      var tr = e.target.closest('tr');
+      if (!tr || tr.classList.contains('detail')) return;
+      var i = Number(tr.getAttribute('data-i'));
+      var old = $('deemer-tbl').querySelector('tr.detail');
+      var oldRow = $('deemer-tbl').querySelector('tr.open');
+      if (old) old.parentNode.removeChild(old);
+      if (oldRow) oldRow.classList.remove('open');
+      if (openI === i) { openI = -1; syncPagerHeight(); return; }
+      openI = i;
+      tr.classList.add('open');
+      var det = document.createElement('tr');
+      det.className = 'detail';
+      det.innerHTML = '<td colspan="' + colCount + '">' + deemerDetail(rows[i], dtrDates, priceDates) + '</td>';
+      tr.parentNode.insertBefore(det, tr.nextSibling);
+      syncPagerHeight();
+    });
+    if (currentTab === 'deemer') applyHeader();
+    syncPagerHeight();
+  }
+  function showDeemerError(msg) {
+    $('deemer-body').innerHTML = '';
+    var err = $('deemer-err');
+    err.hidden = false;
+    err.textContent = msg;
+    if (currentTab === 'deemer') {
+      $('asof-k').textContent = '數據日期';
+      $('asof').textContent = '–';
+      $('src').textContent = '讀取失敗';
+    }
+  }
+
   fetch('earnings.json', { cache: 'no-store' })
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -666,12 +876,32 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       else showEarnError('讀取失敗：網絡或檔案未能載入');
     });
 
+  fetch('deemer.json', { cache: 'no-store' })
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      if (!data || !data.rows || !data.rows.length) {
+        showDeemerError('讀取失敗：Deemer 資料是空的');
+        return;
+      }
+      renderDeemer(data);
+    })
+    .catch(function (e) {
+      var m = (e && e.message) ? String(e.message) : '';
+      if (/^HTTP\s+\d+/.test(m)) showDeemerError('讀取失敗：' + m);
+      else showDeemerError('讀取失敗：網絡或檔案未能載入');
+    });
+
   $('tab-lamp').addEventListener('click', function () { showTab('lamp'); });
   $('tab-earn').addEventListener('click', function () { showTab('earn'); });
+  $('tab-deemer').addEventListener('click', function () { showTab('deemer'); });
   window.addEventListener('hashchange', function () {
-    showTab(decodeURIComponent(location.hash) === '#業績' ? 'earn' : 'lamp');
+    showTab(tabFromHash());
   });
-  if (decodeURIComponent(location.hash) === '#業績') showTab('earn', true);
+  var startTab = tabFromHash();
+  if (startTab !== 'lamp') showTab(startTab, true);
 
   $('refresh').addEventListener('click', function () {
     this.disabled = true;
