@@ -1,105 +1,113 @@
 {
-  "updated": "2026-11-11T13:48:00+08:00",
-  "updatedLabel": "11/11 13:48",
-  "focus": "CoreWeave 昨晚收市後公布季績：收入 $3.66B（+168% YoY）勝街，並上調全年指引，夜盤約升 15.7%。Sea 收市跌 1.5%，TransDigm 收市微升。明日留意 Nebius 開市前，以及 Cisco、Applied Materials、Cerebras 收市後。",
+  "updated": "2026-11-12T20:40:00+08:00",
+  "updatedLabel": "11/12 20:40",
+  "focus": "Nebius 今早公布 Q3：收入 $980.8M（+571% YoY）勝街，但全年收入指引靠向 $3.0–3.4B 下限、ARR 延至 2 月，盤前約跌 10%。CoreWeave 週三收市暴升約 25% 至 $60.77，今早盤前回吐約 10%。Brookfield 收入 +9.4%、DE 每股 +16%，盤前大致持平。今晚收市後留意 Cisco、Applied Materials、Cerebras。",
   "stocks": [
+    {
+      "name": "Nebius（NBIS）",
+      "date": "11/12 開市前",
+      "change": "盤前約 −10%",
+      "changeTone": "down",
+      "metrics": [
+        {
+          "label": "Sales",
+          "value": "$980.8M",
+          "note": "+571% YoY · 勝街約 $73.6M",
+          "noteTone": "up"
+        },
+        {
+          "label": "GAAP EPS",
+          "value": "−$0.13",
+          "note": "勝街約 $1.11 · 去年 −$0.50",
+          "noteTone": "up"
+        }
+      ],
+      "bullets": [
+        "收入含約 $325M 一次性（asset-light 夥伴模式）非經常性收入。Nebius AI Cloud 收入 $973.8M（+643% YoY，佔集團約 99%），調整後 EBITDA $518.2M、利潤率 53.2%。集團 Adj EBITDA $465.8M（利潤率 47%），轉正（去年 −$5.2M）；調整後淨利 $90.9M（去年虧 $100.4M）",
+        "更新 2026 指引：收入靠向 $3.0–3.4B 下限（部分第三方產能延至 2027 上半年）；Adj EBITDA 利潤率維持約 40%；全年 capex 上調至約 $27B（原 $20–25B）。ARR 由原先 12 月 $7–9B，改為預期 2 月超過 $7B（延約兩個月）；9 月底 ARR 已達 $6.4B",
+        "季末現金及等價物 $7.4B；Q3 capex 約 $7.3B。預期 2026 年客戶預付承諾 $10B。初步 2027 展望：收入 $12–13B，目標年底稅前打和；合約電力年底仍目標 5 GW。週三收市 $154.69，今早盤前約 $138.6"
+      ],
+      "source": "來源：Nebius IR（業績稿／股東信）、Seeking Alpha、Yahoo Finance"
+    },
     {
       "name": "CoreWeave（CRWV）",
       "date": "11/10 收市後",
-      "change": "夜盤約 +15.7%",
+      "change": "週三收市 +24.7%；盤前約 −10%",
       "changeTone": "up",
       "metrics": [
         {
           "label": "Sales",
-          "value": "$3.661B",
-          "note": "+168% YoY · 勝街",
+          "value": "$3.66B",
+          "note": "+168% YoY · 勝街約 $3.55B",
           "noteTone": "up"
         },
         {
           "label": "Adj EPS",
           "value": "−$0.95",
-          "note": "勝街（街估 −$1.16）",
+          "note": "勝街約 −$1.16 · GAAP −$1.27（去年 −$0.22）",
           "noteTone": "up"
         }
       ],
       "bullets": [
-        "上調全年收入指引至 $13.0–13.3B，經調整經營溢利指引中位升約 26%",
-        "收入積壓約 $132.5B；淨虧 $709M，利息開支 $846M 仍係焦點"
+        "調整後經營利潤 $379M，利潤率約 10%，提早一季達到雙位數；Adj EBITDA $2.26B（利潤率 62%）。GAAP 淨虧 $709M，主因利息開支 $846M（去年 $310M）",
+        "上調全年 2026 收入指引至 $13.0–13.3B，調整後經營利潤 $1.275–1.375B（中位較早前指引升 26%）；年底年化收入指引 $20–21B；資本開支 $37–39B",
+        "9 月底收入 backlog 約 $132.5B；公司指未來三個月預計收到約 $90 億客戶預付／按金。週三收市 $60.77（+24.7%），今早盤前約 $54.8（回吐約 10%）"
       ],
-      "source": "來源：CoreWeave IR、Yahoo Finance、CNBC"
+      "source": "來源：CoreWeave IR、CNBC、Yahoo Finance"
     },
     {
-      "name": "Sea Limited（SE）",
-      "date": "11/10 開市前",
-      "change": "收市 −1.49%",
-      "changeTone": "down",
-      "metrics": [
-        {
-          "label": "Sales",
-          "value": "$8.58B",
-          "note": "+43.4% YoY · 勝街",
-          "noteTone": "up"
-        },
-        {
-          "label": "EPS",
-          "value": "$0.78",
-          "note": "+32% YoY · 遜街",
-          "noteTone": "down"
-        }
-      ],
-      "bullets": [
-        "淨利 $502.5M（+34%）；Shopee 收入 $6.1B（+41.3%）",
-        "已完成近 $10 億回購；董事會再批額外 $10 億授權"
-      ],
-      "source": "來源：Sea IR、Yahoo Finance"
-    },
-    {
-      "name": "TransDigm（TDG）",
-      "date": "11/10 開市前",
-      "change": "收市 +0.55%",
+      "name": "Brookfield（BN）",
+      "date": "11/12 開市前",
+      "change": "盤前約 +0.7%",
       "changeTone": "up",
       "metrics": [
         {
           "label": "Sales",
-          "value": "$2.99B",
-          "note": "+23% YoY · 勝街",
+          "value": "$20.69B",
+          "note": "+9.4% YoY（去年 $18.92B）",
           "noteTone": "up"
         },
         {
-          "label": "Adj EPS",
-          "value": "$12.44",
-          "note": "+15% YoY · 勝街",
+          "label": "EPS（攤薄）",
+          "value": "$0.54",
+          "note": "去年 $0.08 · DE $0.73（+16% YoY，街估約 $0.72）",
           "noteTone": "up"
         }
       ],
       "bullets": [
-        "Q4 回購 $943M；全年回購約 $28 億",
-        "FY27 Adj EPS 指引中位低於部分街估"
+        "股東應佔淨利 $1.31B（去年 $2.19 億）；合併淨利 $1.91B（去年 $2.84 億）。可分配盈利（DE）$1.72B／每股 $0.73，略勝街；未計變現 DE 每股 $0.64（+14% YoY）",
+        "資產管理季內募集 $250 億；費用相關盈利 +15%；財富方案 DE +22% 至 $511M。年初至今回購 $8.89 億（上次公布後逾 $3 億）",
+        "企業簡化計劃預期 12/1 完成，新股預計 12/3 起以 BN 代號開始交易。週三收市 $42.06，今早盤前約 $42.34"
       ],
-      "source": "來源：TransDigm IR、Yahoo Finance"
+      "source": "來源：Brookfield IR、AP／Zacks、Yahoo Finance"
     }
   ],
   "upcoming": [
     {
       "date": "11/12",
-      "name": "Nebius（NBIS）",
-      "note": "開市前；AI 雲／虧損同融資焦點"
-    },
-    {
-      "date": "11/12",
       "name": "Cisco（CSCO）",
-      "note": "收市後；本週市值最大"
+      "note": "今晚收市後；本週市值最大（街估 EPS 約 $1.33、收入約 $18.1B），焦點 AI 網路訂單"
     },
     {
       "date": "11/12",
       "name": "Applied Materials（AMAT）",
-      "note": "收市後；半導體設備／AI 資本開支"
+      "note": "今晚收市後；半導體設備／AI 資本開支（街估 EPS 約 $4.06、收入約 $10.3B）"
     },
     {
       "date": "11/12",
       "name": "Cerebras（CBRS）",
-      "note": "收市後；AI 晶片新股業績焦點"
+      "note": "今晚收市後；AI 晶片新股業績焦點（街估 EPS 約 −$0.13）"
+    },
+    {
+      "date": "11/12",
+      "name": "Nu Holdings（NU）",
+      "note": "今日；拉美數位銀行（街估 EPS 約 $0.22）"
+    },
+    {
+      "date": "11/13",
+      "name": "Mitsubishi UFJ（MUFG）",
+      "note": "週五；本週餘下較少美股重點，日資巨頭依然值得留意"
     }
   ],
-  "upcomingNote": "只列今個星期。日期以公司確認為準。"
+  "upcomingNote": "只列今個星期（11/9–11/13 美東）。日期以公司確認為準。"
 }
