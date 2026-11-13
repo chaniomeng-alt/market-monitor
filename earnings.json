@@ -1,112 +1,102 @@
 {
-  "updated": "2026-11-12T20:40:00+08:00",
-  "updatedLabel": "11/12 20:40",
-  "focus": "Nebius 今早公布 Q3：收入 $980.8M（+571% YoY）勝街，但全年收入指引靠向 $3.0–3.4B 下限、ARR 延至 2 月，盤前約跌 10%。CoreWeave 週三收市暴升約 25% 至 $60.77，今早盤前回吐約 10%。Brookfield 收入 +9.4%、DE 每股 +16%，盤前大致持平。今晚收市後留意 Cisco、Applied Materials、Cerebras。",
+  "updated": "2026-11-13T20:40:00+08:00",
+  "updatedLabel": "11/13 20:40",
+  "focus": "週四收市後三大 AI 相關業績：Cisco 收入 $18.5B（+24%）並上調全年及 AI 基建展望，但週五盤前約跌 3.3% 至 $98.68。Applied Materials 季度收入創新高 $10.41B（+53%），指引勝街，股價反應平淡（盤前約 $379，較收市微跌）。Cerebras 上調全年核心收入至 $9.40–9.60 億，盤前大升約 16% 至 $113。Nebius 週四收市跌 16.8% 至 $128.64，今早盤前再軟至約 $126。今日美股開市將消化日本三大銀行業績；本週主要美股業績日曆已近尾聲。",
   "stocks": [
     {
-      "name": "Nebius（NBIS）",
-      "date": "11/12 開市前",
-      "change": "盤前約 −10%",
+      "name": "Cisco（CSCO）",
+      "date": "11/12 收市後",
+      "change": "盤前約 −3.3%",
       "changeTone": "down",
       "metrics": [
         {
           "label": "Sales",
-          "value": "$980.8M",
-          "note": "+571% YoY · 勝街約 $73.6M",
+          "value": "$18.5B",
+          "note": "+24% YoY · 勝街（街估約 $18.1B）",
+          "noteTone": "up"
+        },
+        {
+          "label": "非 GAAP EPS",
+          "value": "$1.40",
+          "note": "+40% YoY · 勝街（街估約 $1.33）",
+          "noteTone": "up"
+        }
+      ],
+      "bullets": [
+        "GAAP EPS $1.14（+58% YoY）。產品收入 +32%、服務 +1%；非 GAAP 經營利潤率 37.8%。CEO Robbins 指係十五年來最強收入與非 GAAP EPS 增速，並稱網絡超級周期仍處早期",
+        "上調 FY27：收入 $74.8–75.8B、非 GAAP EPS $5.47–5.53；Q2 指引收入 $18.0–18.2B、非 GAAP EPS $1.34–1.36。來自 hyperscaler 的 AI 基建收入展望上調至 FY27 $9B，超過 FY26 全年一倍",
+        "季息 $0.42。週四收市 $102.01（業績前 +1.2%），盤後大致持平，今早盤前約 $98.68（約 −3.3%）"
+      ],
+      "source": "來源：Cisco IR、Yahoo Finance"
+    },
+    {
+      "name": "Applied Materials（AMAT）",
+      "date": "11/12 收市後",
+      "change": "盤前約 −0.4%",
+      "changeTone": "down",
+      "metrics": [
+        {
+          "label": "Sales",
+          "value": "$10.41B",
+          "note": "+53% YoY · 勝街（街估約 $10.30B）",
+          "noteTone": "up"
+        },
+        {
+          "label": "非 GAAP EPS",
+          "value": "$4.16",
+          "note": "+92% YoY · 勝街（街估約 $4.06）",
+          "noteTone": "up"
+        }
+      ],
+      "bullets": [
+        "GAAP EPS $3.40（+43% YoY）。全年收入創新高 $34.45B（+21%），非 GAAP EPS $12.89（+37%）。單季自由現金流 $26 億，向股東派發 $24.2 億（回購 $20 億＋股息 $4.21 億）",
+        "Q1 FY27 指引：收入 $11.1B ±$5 億、非 GAAP EPS $4.35 ±$0.20（中位高於街估）。CEO 指 Semiconductor Systems 往曆年 2026 增長超過 40%",
+        "Reuters 引述管理層：中國佔 Q4 收入約 25%（去年 29%），當地銷售仍升約 35% 至 $26.4 億。週四收市已跌 3.6% 至 $380.95；盤後微升至約 $383.6，今早盤前約 $379.42（較收市約 −0.4%）"
+      ],
+      "source": "來源：Applied Materials IR、Reuters、Yahoo Finance"
+    },
+    {
+      "name": "Cerebras（CBRS）",
+      "date": "11/12 收市後",
+      "change": "盤前約 +15.8%",
+      "changeTone": "up",
+      "metrics": [
+        {
+          "label": "Sales（核心）",
+          "value": "$230.9M",
+          "note": "+70% YoY · GAAP $210.8M（+55%）",
           "noteTone": "up"
         },
         {
           "label": "GAAP EPS",
-          "value": "−$0.13",
-          "note": "勝街約 $1.11 · 去年 −$0.50",
-          "noteTone": "up"
+          "value": "−$0.67",
+          "note": "去年 −$0.41 · 核心淨利轉正 $29.8M",
+          "noteTone": "down"
         }
       ],
       "bullets": [
-        "收入含約 $325M 一次性（asset-light 夥伴模式）非經常性收入。Nebius AI Cloud 收入 $973.8M（+643% YoY，佔集團約 99%），調整後 EBITDA $518.2M、利潤率 53.2%。集團 Adj EBITDA $465.8M（利潤率 47%），轉正（去年 −$5.2M）；調整後淨利 $90.9M（去年虧 $100.4M）",
-        "更新 2026 指引：收入靠向 $3.0–3.4B 下限（部分第三方產能延至 2027 上半年）；Adj EBITDA 利潤率維持約 40%；全年 capex 上調至約 $27B（原 $20–25B）。ARR 由原先 12 月 $7–9B，改為預期 2 月超過 $7B（延約兩個月）；9 月底 ARR 已達 $6.4B",
-        "季末現金及等價物 $7.4B；Q3 capex 約 $7.3B。預期 2026 年客戶預付承諾 $10B。初步 2027 展望：收入 $12–13B，目標年底稅前打和；合約電力年底仍目標 5 GW。週三收市 $154.69，今早盤前約 $138.6"
+        "核心雲及其他服務收入 $144.9M（+272% YoY）。核心毛利率 41%，核心經營利潤率 −14%。GAAP 淨虧 $1.612 億",
+        "上調指引：Q4 核心收入約 $3.10–3.30 億；全年核心收入 $9.40–9.60 億。CEO 預期 2027 年收入可再翻三倍。9 月底剩餘履約義務（RPO）$261 億；簽約數據中心容量 700 MW；現金及短期投資等流動性 $78 億",
+        "新增兩家 hyperscaler 商業客戶；Oracle 將於 2027 年把 Cerebras 推論整合進 OCI。週四收市 $97.75，盤後最高約 $115.7，今早盤前約 $113.16（約 +15.8%）"
       ],
-      "source": "來源：Nebius IR（業績稿／股東信）、Seeking Alpha、Yahoo Finance"
-    },
-    {
-      "name": "CoreWeave（CRWV）",
-      "date": "11/10 收市後",
-      "change": "週三收市 +24.7%；盤前約 −10%",
-      "changeTone": "up",
-      "metrics": [
-        {
-          "label": "Sales",
-          "value": "$3.66B",
-          "note": "+168% YoY · 勝街約 $3.55B",
-          "noteTone": "up"
-        },
-        {
-          "label": "Adj EPS",
-          "value": "−$0.95",
-          "note": "勝街約 −$1.16 · GAAP −$1.27（去年 −$0.22）",
-          "noteTone": "up"
-        }
-      ],
-      "bullets": [
-        "調整後經營利潤 $379M，利潤率約 10%，提早一季達到雙位數；Adj EBITDA $2.26B（利潤率 62%）。GAAP 淨虧 $709M，主因利息開支 $846M（去年 $310M）",
-        "上調全年 2026 收入指引至 $13.0–13.3B，調整後經營利潤 $1.275–1.375B（中位較早前指引升 26%）；年底年化收入指引 $20–21B；資本開支 $37–39B",
-        "9 月底收入 backlog 約 $132.5B；公司指未來三個月預計收到約 $90 億客戶預付／按金。週三收市 $60.77（+24.7%），今早盤前約 $54.8（回吐約 10%）"
-      ],
-      "source": "來源：CoreWeave IR、CNBC、Yahoo Finance"
-    },
-    {
-      "name": "Brookfield（BN）",
-      "date": "11/12 開市前",
-      "change": "盤前約 +0.7%",
-      "changeTone": "up",
-      "metrics": [
-        {
-          "label": "Sales",
-          "value": "$20.69B",
-          "note": "+9.4% YoY（去年 $18.92B）",
-          "noteTone": "up"
-        },
-        {
-          "label": "EPS（攤薄）",
-          "value": "$0.54",
-          "note": "去年 $0.08 · DE $0.73（+16% YoY，街估約 $0.72）",
-          "noteTone": "up"
-        }
-      ],
-      "bullets": [
-        "股東應佔淨利 $1.31B（去年 $2.19 億）；合併淨利 $1.91B（去年 $2.84 億）。可分配盈利（DE）$1.72B／每股 $0.73，略勝街；未計變現 DE 每股 $0.64（+14% YoY）",
-        "資產管理季內募集 $250 億；費用相關盈利 +15%；財富方案 DE +22% 至 $511M。年初至今回購 $8.89 億（上次公布後逾 $3 億）",
-        "企業簡化計劃預期 12/1 完成，新股預計 12/3 起以 BN 代號開始交易。週三收市 $42.06，今早盤前約 $42.34"
-      ],
-      "source": "來源：Brookfield IR、AP／Zacks、Yahoo Finance"
+      "source": "來源：Cerebras IR、Yahoo Finance"
     }
   ],
   "upcoming": [
     {
-      "date": "11/12",
-      "name": "Cisco（CSCO）",
-      "note": "今晚收市後；本週市值最大（街估 EPS 約 $1.33、收入約 $18.1B），焦點 AI 網路訂單"
-    },
-    {
-      "date": "11/12",
-      "name": "Applied Materials（AMAT）",
-      "note": "今晚收市後；半導體設備／AI 資本開支（街估 EPS 約 $4.06、收入約 $10.3B）"
-    },
-    {
-      "date": "11/12",
-      "name": "Cerebras（CBRS）",
-      "note": "今晚收市後；AI 晶片新股業績焦點（街估 EPS 約 −$0.13）"
-    },
-    {
-      "date": "11/12",
-      "name": "Nu Holdings（NU）",
-      "note": "今日；拉美數位銀行（街估 EPS 約 $0.22）"
+      "date": "11/13",
+      "name": "Mitsubishi UFJ（MUFG）",
+      "note": "已公布：上半年純利 ¥1.631 兆（+26.1%），全年目標上調至 ¥2.8 兆（原 ¥2.7 兆），另公布 ¥2,000 億回購；今早盤前約 $21.85（較週四收市大致持平）"
     },
     {
       "date": "11/13",
-      "name": "Mitsubishi UFJ（MUFG）",
-      "note": "週五；本週餘下較少美股重點，日資巨頭依然值得留意"
+      "name": "Sumitomo Mitsui（SMFG）",
+      "note": "已公布：上半年純利約 ¥1.003 兆（+7.5%），Q2 純利 ¥5,018 億（−10%），全年展望上調至 ¥1.9 兆（原 ¥1.7 兆）；盤前約 $23.35（約 −4.1%）"
+    },
+    {
+      "date": "11/13",
+      "name": "Mizuho（MFG）",
+      "note": "已公布：上半年純利 ¥8,965 億（+29.9%），全年展望上調至 ¥1.6 兆（原 ¥1.4 兆）；盤前約 $10.31（約 +1.9%）"
     }
   ],
   "upcomingNote": "只列今個星期（11/9–11/13 美東）。日期以公司確認為準。"
