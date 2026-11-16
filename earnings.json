@@ -1,103 +1,118 @@
 {
-  "updated": "2026-11-13T20:40:00+08:00",
-  "updatedLabel": "11/13 20:40",
-  "focus": "週四收市後三大 AI 相關業績：Cisco 收入 $18.5B（+24%）並上調全年及 AI 基建展望，但週五盤前約跌 3.3% 至 $98.68。Applied Materials 季度收入創新高 $10.41B（+53%），指引勝街，股價反應平淡（盤前約 $379，較收市微跌）。Cerebras 上調全年核心收入至 $9.40–9.60 億，盤前大升約 16% 至 $113。Nebius 週四收市跌 16.8% 至 $128.64，今早盤前再軟至約 $126。今日美股開市將消化日本三大銀行業績；本週主要美股業績日曆已近尾聲。",
-  "stocks": [
+ "updated": "2026-11-16T20:45:00+08:00",
+ "updatedLabel": "11/16 20:45",
+ "focus": "週一盤前美股期貨偏軟，納指期貨約 −1.5%、標指期貨約 −0.7%。NVIDIA 盤前再跌約 3%，過去五日累跌近 13%；FT 報道黃仁勳及支持者商討爭取復任，週二收市後業績成全週最大焦點，週四再有 Anthropic 上市（目標估值約 $1.4 兆）。中概股方面，百度廣告續縮但 AI 雲近倍增，小鵬收入勝預期兼 Q4 交付指引強勁；Tyson 全年收入指引遠遜預期。週二公布 10 月零售銷售，週中 Target、Walmart 業績將檢驗感恩節前消費。布蘭特期油約 $94。",
+ "stocks": [
+  {
+   "name": "百度（BIDU）",
+   "date": "11/16 開市前",
+   "change": "盤前窄幅上落（約 −1%～+0.2%）",
+   "changeTone": "down",
+   "metrics": [
     {
-      "name": "Cisco（CSCO）",
-      "date": "11/12 收市後",
-      "change": "盤前約 −3.3%",
-      "changeTone": "down",
-      "metrics": [
-        {
-          "label": "Sales",
-          "value": "$18.5B",
-          "note": "+24% YoY · 勝街（街估約 $18.1B）",
-          "noteTone": "up"
-        },
-        {
-          "label": "非 GAAP EPS",
-          "value": "$1.40",
-          "note": "+40% YoY · 勝街（街估約 $1.33）",
-          "noteTone": "up"
-        }
-      ],
-      "bullets": [
-        "GAAP EPS $1.14（+58% YoY）。產品收入 +32%、服務 +1%；非 GAAP 經營利潤率 37.8%。CEO Robbins 指係十五年來最強收入與非 GAAP EPS 增速，並稱網絡超級周期仍處早期",
-        "上調 FY27：收入 $74.8–75.8B、非 GAAP EPS $5.47–5.53；Q2 指引收入 $18.0–18.2B、非 GAAP EPS $1.34–1.36。來自 hyperscaler 的 AI 基建收入展望上調至 FY27 $9B，超過 FY26 全年一倍",
-        "季息 $0.42。週四收市 $102.01（業績前 +1.2%），盤後大致持平，今早盤前約 $98.68（約 −3.3%）"
-      ],
-      "source": "來源：Cisco IR、Yahoo Finance"
+     "label": "Sales",
+     "value": "¥308億（$46億）",
+     "note": "−1% YoY · 大致符合街估（¥306億）",
+     "noteTone": "mid"
     },
     {
-      "name": "Applied Materials（AMAT）",
-      "date": "11/12 收市後",
-      "change": "盤前約 −0.4%",
-      "changeTone": "down",
-      "metrics": [
-        {
-          "label": "Sales",
-          "value": "$10.41B",
-          "note": "+53% YoY · 勝街（街估約 $10.30B）",
-          "noteTone": "up"
-        },
-        {
-          "label": "非 GAAP EPS",
-          "value": "$4.16",
-          "note": "+92% YoY · 勝街（街估約 $4.06）",
-          "noteTone": "up"
-        }
-      ],
-      "bullets": [
-        "GAAP EPS $3.40（+43% YoY）。全年收入創新高 $34.45B（+21%），非 GAAP EPS $12.89（+37%）。單季自由現金流 $26 億，向股東派發 $24.2 億（回購 $20 億＋股息 $4.21 億）",
-        "Q1 FY27 指引：收入 $11.1B ±$5 億、非 GAAP EPS $4.35 ±$0.20（中位高於街估）。CEO 指 Semiconductor Systems 往曆年 2026 增長超過 40%",
-        "Reuters 引述管理層：中國佔 Q4 收入約 25%（去年 29%），當地銷售仍升約 35% 至 $26.4 億。週四收市已跌 3.6% 至 $380.95；盤後微升至約 $383.6，今早盤前約 $379.42（較收市約 −0.4%）"
-      ],
-      "source": "來源：Applied Materials IR、Reuters、Yahoo Finance"
-    },
-    {
-      "name": "Cerebras（CBRS）",
-      "date": "11/12 收市後",
-      "change": "盤前約 +15.8%",
-      "changeTone": "up",
-      "metrics": [
-        {
-          "label": "Sales（核心）",
-          "value": "$230.9M",
-          "note": "+70% YoY · GAAP $210.8M（+55%）",
-          "noteTone": "up"
-        },
-        {
-          "label": "GAAP EPS",
-          "value": "−$0.67",
-          "note": "去年 −$0.41 · 核心淨利轉正 $29.8M",
-          "noteTone": "down"
-        }
-      ],
-      "bullets": [
-        "核心雲及其他服務收入 $144.9M（+272% YoY）。核心毛利率 41%，核心經營利潤率 −14%。GAAP 淨虧 $1.612 億",
-        "上調指引：Q4 核心收入約 $3.10–3.30 億；全年核心收入 $9.40–9.60 億。CEO 預期 2027 年收入可再翻三倍。9 月底剩餘履約義務（RPO）$261 億；簽約數據中心容量 700 MW；現金及短期投資等流動性 $78 億",
-        "新增兩家 hyperscaler 商業客戶；Oracle 將於 2027 年把 Cerebras 推論整合進 OCI。週四收市 $97.75，盤後最高約 $115.7，今早盤前約 $113.16（約 +15.8%）"
-      ],
-      "source": "來源：Cerebras IR、Yahoo Finance"
+     "label": "非 GAAP EPADS",
+     "value": "¥6.78（$1.01）",
+     "note": "−39% YoY（去年 ¥11.12）· 街估口徑分歧",
+     "noteTone": "down"
     }
-  ],
-  "upcoming": [
+   ],
+   "bullets": [
+    "連續第六季收入下跌：網絡營銷收入 −22% 至 ¥119億，廣告佔百度一般業務比重跌至 48%（去年 62%）；AI 原生營銷 −15% 至 ¥24億，公司歸咎經濟弱、競爭激烈及 AI 搜尋改版",
+    "AI 雲基建收入 +94% 至 ¥82億，GPU 雲 +191% YoY；AI 相關業務合共 ¥132億（+37%），佔一般業務 53%。愛奇藝收入 −10% 至 ¥60億",
+    "經營利潤 ¥6.26億（利潤率 2%），歸屬淨利 ¥14億（去年因減值錄虧）。年初至今回購 $3.73億，預期年底前宣派首次股息。Seeking Alpha 指 EPADS 勝 $0.09，Investing.com 引街估 ¥7.67 則屬遜預期；週五收市 $78.14"
+   ],
+   "source": "來源：百度 HKEX 公告／PR Newswire、Investing.com、Seeking Alpha、Yahoo Finance（AP）"
+  },
+  {
+   "name": "小鵬汽車（XPEV）",
+   "date": "11/16 開市前",
+   "change": "盤前 +3%+",
+   "changeTone": "up",
+   "metrics": [
     {
-      "date": "11/13",
-      "name": "Mitsubishi UFJ（MUFG）",
-      "note": "已公布：上半年純利 ¥1.631 兆（+26.1%），全年目標上調至 ¥2.8 兆（原 ¥2.7 兆），另公布 ¥2,000 億回購；今早盤前約 $21.85（較週四收市大致持平）"
+     "label": "Sales",
+     "value": "¥242.8億（$36.2億）",
+     "note": "+19.1% YoY · 勝街（街估 ¥232.2億）· 季度新高",
+     "noteTone": "up"
     },
     {
-      "date": "11/13",
-      "name": "Sumitomo Mitsui（SMFG）",
-      "note": "已公布：上半年純利約 ¥1.003 兆（+7.5%），Q2 純利 ¥5,018 億（−10%），全年展望上調至 ¥1.9 兆（原 ¥1.7 兆）；盤前約 $23.35（約 −4.1%）"
-    },
-    {
-      "date": "11/13",
-      "name": "Mizuho（MFG）",
-      "note": "已公布：上半年純利 ¥8,965 億（+29.9%），全年展望上調至 ¥1.6 兆（原 ¥1.4 兆）；盤前約 $10.31（約 +1.9%）"
+     "label": "每 ADS 虧損",
+     "value": "−¥0.91",
+     "note": "淨虧 ¥8.7億，按年擴大 127.9% · 遜街（街估 −¥0.45）",
+     "noteTone": "down"
     }
-  ],
-  "upcomingNote": "只列今個星期（11/9–11/13 美東）。日期以公司確認為準。"
+   ],
+   "bullets": [
+    "交付 118,390 輛（+2.1% YoY，+14.6% QoQ）創新高；收入超出指引上限約 3.8%，出口佔銷量 26%（上半年 19%）帶動平均售價",
+    "毛利率 18.9%（去年 20.1%），汽車毛利率 13.1%（Q2 12.1%）；服務及其他毛利率跌至 67.1%。非 GAAP 淨虧 ¥8.9億，Goldman 指主要因收購滴滴智能汽車業務相關公允值收益撥回",
+    "Q4 指引：交付 169,000–174,000 輛（+45%～50% YoY），收入 ¥304–318億（+37%～43%）；Goldman 指交付指引中位高過預期約 7%。9 月底現金 ¥454億"
+   ],
+   "source": "來源：小鵬 HKEX 公告／SEC 6-K、CnEVPost、Investing.com"
+  },
+  {
+   "name": "Tyson Foods（TSN）",
+   "date": "11/16 開市前",
+   "change": "盤前約 −1.1%",
+   "changeTone": "down",
+   "metrics": [
+    {
+     "label": "Sales",
+     "value": "$14.59B",
+     "note": "+5.2% YoY · 勝街（LSEG 街估 $14.17B）",
+     "noteTone": "up"
+    },
+    {
+     "label": "經調整 EPS",
+     "value": "$0.61",
+     "note": "−47% YoY（去年 $1.15）· 街估口徑 $0.53–0.65 不一",
+     "noteTone": "down"
+    }
+   ],
+   "bullets": [
+    "牛肉業務繼續拖累：銷量 −6%，經營虧損 $5.14億（去年虧 $2.77億），美國牛隻存量處 75 年低位，收購成本升幅快過牛肉售價",
+    "雞肉業務強勁：銷量 +9.9%，經營利潤率 8.4%",
+    "FY27 指引收入下跌 3.5%～5.5%，遠差過 LSEG 街估約 −1%，主因重組後牛肉銷量減少及牛隻短缺，雞肉、豬肉展望亦轉弱。盤前約 $58.17（前收 $58.82，美東 7:41）"
+   ],
+   "source": "來源：Tyson IR、Reuters（StreetInsider）、TradingView、StockMarketWatch"
+  }
+ ],
+ "upcoming": [
+  {
+   "date": "11/17",
+   "name": "Home Depot（HD）· Disney（DIS）",
+   "note": "週二開市前：HD 街估 EPS $3.87（去年 $3.74），睇家居需求；DIS 街估 $1.67，睇串流同主題樂園"
+  },
+  {
+   "date": "11/17",
+   "name": "NVIDIA（NVDA）",
+   "note": "週二收市後：黃仁勳 11/12 辭任後首份業績，Kress 署任 CEO；街估 EPS $2.49（去年 $1.24），焦點 Data Center 同指引"
+  },
+  {
+   "date": "11/18",
+   "name": "Target（TGT）· Lowe's（LOW）· TJX",
+   "note": "週三開市前：感恩節前零售需求、關稅退款影響；LOW 街估 $2.86、TJX $1.33"
+  },
+  {
+   "date": "11/18",
+   "name": "Palo Alto Networks（PANW）",
+   "note": "週三收市後：網絡安全平台化進度同 ARR 指引"
+  },
+  {
+   "date": "11/19",
+   "name": "Walmart（WMT）· Alibaba（BABA）",
+   "note": "週四開市前：WMT 街估 $0.64（指引 $0.62–0.64）睇美國消費；BABA 睇雲業務同 AI 投入"
+  },
+  {
+   "date": "11/19",
+   "name": "Intuit（INTU）",
+   "note": "週四收市後：AI 助理對 TurboTax／QuickBooks 增長嘅帶動"
+  }
+ ],
+ "upcomingNote": "只列今個星期（11/16–11/20，日期為美東）。來源：NVIDIA IR、StockTitan、TipRanks、Kiplinger。"
 }
