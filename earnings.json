@@ -1,113 +1,103 @@
 {
- "updated": "2026-11-17T20:48:00+08:00",
- "updatedLabel": "11/17 20:48",
- "focus": "週二美東盤前期貨偏軟（約 5:23 美東：道指期約 −0.45%、標指同納指期約 −0.34%），全場焦點係收市後 NVIDIA 業績。黃仁勳辭任後市值累計蒸發約 $4,100億，盤前 NVDA 再跌約 0.4%；另有報道指公司通知客戶，將停止向把過半 GPU 租予中國企業的數據中心營運商供貨。開市前 Disney 業績同指引勝預期、股息加 33%，盤前約 +2%；Home Depot 數字勝出但宣布新 CEO，盤前約 −1.8%；京東收入重返增長但略遜街估，盤前約 −3.4%。今日另有 10 月零售銷售；週三 Target、Lowe's、TJX，週四 Walmart、阿里、Intuit 將檢驗假期消費同中概前景。",
+ "updated": "2026-11-18T20:45:00+08:00",
+ "updatedLabel": "11/18 20:45",
+ "focus": "週三美東盤前期貨偏強（Yahoo Finance 美東約 7:40：道指期約 +0.3%、標指期約 +0.5%、納指期約 +0.9%），主因 NVIDIA 業績同第 4 季指引勝預期，暫穩 AI 情緒。NVDA 盤前約 +3%（收市後一度升逾 5%），帶動 AMD、Broadcom、CoreWeave、Nebius 等 AI 鏈上升。開市前零售分化：Target 錄得五年最強銷售增長並上調指引，但較新盤前報道約跌 1%；Lowe's 數字勝出但毛利率收窄、利潤率指引微降，盤前跌逾 3%；TJX 收入 +6%、EPS $1.39（+9%，經調整 $1.34），同店 +4% 高過自身計劃，全年 EPS 指引 $5.33–$5.36。今日另有 10 月房屋數據同聯儲局 10 月會議紀要；收市後留意 Palo Alto，週四開市前有 Walmart、阿里，傍晚前後市場亦關注 Anthropic IPO 定價。",
  "stocks": [
   {
-   "name": "Disney（DIS）",
-   "date": "11/17 開市前",
-   "change": "盤前約 +2%",
+   "name": "NVIDIA（NVDA）",
+   "date": "11/17 收市後",
+   "change": "盤前約 +3%（收市後一度升逾 5%）",
    "changeTone": "up",
    "metrics": [
     {
      "label": "Sales",
-     "value": "$25.95B",
-     "note": "+16% YoY · 勝街（LSEG 街估 $25.18B）",
+     "value": "$115.8B",
+     "note": "+103% YoY · 勝街（LSEG 街估 $109.10B）",
      "noteTone": "up"
     },
     {
-     "label": "經調整 EPS",
-     "value": "$1.77",
-     "note": "+59% YoY（去年 $1.11）· 勝街（LSEG $1.67）",
+     "label": "非 GAAP EPS",
+     "value": "$2.68",
+     "note": "+111% YoY（去年 $1.27）· 勝街（LSEG $2.48）；GAAP EPS $2.70（+108%）",
      "noteTone": "up"
     }
    ],
    "bullets": [
-    "樂園／體驗（Experiences）收入 +15% 至 $10.11B，經營利潤 +20% 至 $22.5億；官方股東信指全球訪客 +4%。國際客源偏弱，靠美國（尤其 Disney World）同巴黎 Frozen 園區抵消；香港、上海仍然疲弱",
-    "娛樂串流（SVOD）收入 +19% 至 $61億，經營利潤由去年 $4.02億升至 $8.24億，全年經營利潤率 11.5%；第 53 週約貢獻串流收入增長當中 9%。體育收入 +16% 至 $46.1億，經營利潤升逾 50% 至 $13.9億",
-    "全年收入 $1,023億（+8%），經調整 EPS $7.02（+18%）。FY27 撇除第 53 週影響：經調整 EPS 雙位數增長、分部經營利潤約 +8%，增長集中上半年（復仇者聯盟：末日／超級碗）。股息上調 33% 至每股 $2；計劃 2029 財年前削減成本 $30億（包括再裁員），以支撐 FY27 內容開支 $260億（+9%）"
+    "數據中心收入 $107.6B（+110% YoY、+21% 季增），高過 Street Account 街估 $101.87B；當中 Hyperscale $60.1B（+71%），AI Clouds／工業／企業 $47.5B（+195%）。邊緣運算 $8.2B（+42%）。向中國出貨 Hopper 數據中心產品 $24億",
+    "第 4 季指引收入 $130.0B（±3%），高過 LSEG 街估 $125.1B，但不計中國數據中心運算收入；毛利率指引降至 71.0%–72.0%（本季 GAAP 74.8%）。官方指第 4 季多一週；Melius 估呢個額外星期約佔按季增幅當中 $90–100億。多家媒體指公司將 2028 財年增長預測由 70% 上調至 75%",
+    "Vera Rubin NVL72 已出貨，官方稱為史上最快產品爬坡，合作雲包括 CoreWeave、Google Cloud、Azure、OCI、Nebius 等。供應承諾由上季 $2,790億增至 $3,900億（主要為多年記憶體採購）。9 月董事會再批 $1,500億回購授權，季末剩餘約 $2,273億；本季回饋股東 $281億。黃仁勳表示願意回歸，但董事局主席 Harvey Jones 喺業績會上指無意恢復其 CEO 職務"
    ],
-   "source": "來源：Disney 8-K／股東信、CNBC、Investing.com、Yahoo Finance"
+   "source": "來源：NVIDIA IR／CFO Commentary、CNBC、Yahoo Finance、Investopedia"
   },
   {
-   "name": "Home Depot（HD）",
-   "date": "11/17 開市前",
-   "change": "盤前約 −1.8%（美東 7:45）",
+   "name": "Target（TGT）",
+   "date": "11/18 開市前",
+   "change": "盤前約 −1%（早段曾見約 +1.6%）",
    "changeTone": "down",
    "metrics": [
     {
      "label": "Sales",
-     "value": "$43.4B",
-     "note": "+4.9% YoY · 勝街（LSEG 街估 $42.80B）",
+     "value": "$27.1B",
+     "note": "+7.1% YoY · 勝街（LSEG 街估 $26.56B）",
      "noteTone": "up"
     },
     {
      "label": "經調整 EPS",
-     "value": "$3.86",
-     "note": "+3.2% YoY（去年 $3.74）· 勝街（LSEG $3.84）",
+     "value": "$2.65",
+     "note": "+49% YoY（去年經調整 $1.78；GAAP 同為 $2.65）· 含關稅退款 $0.50",
      "noteTone": "up"
     }
    ],
    "bullets": [
-    "同店銷售 +2.2%（美國同樣 +2.2%），高過街估約 1.7%／1.5%；網上同店約 +13%，連續第六季雙位數。客單 +3%，但訪店次數減少。專業承包商同小型維修需求，抵消可選消費疲弱",
-    "電力相關部門錄得雙位數增長，儲物、水喉、電氣為中單位數增長。美國 30 年按揭利率仍高於 7%，住房市場壓力未除",
-    "全年指引收窄為點估計：收入增長約 4.5%（原區間上沿），同店約 +1.4%（原為持平至 +2%），經調整 EPS 增長約 2%（原為持平至 +4%）。現任 CFO Richard McPhail 將於 11/23 出任 CEO，Ted Decker 改任主席；Ann-Marie Campbell 出任總裁兼 COO。Yahoo Finance 美東 7:45 盤前報 $341.50"
+    "CNBC 指呢係五年以來最強銷售增長。同店 +5.6%（StreetAccount 街估約 +3.8%），客流 +5.0%；實體店同店 +4.6%、數碼同店 +9.8%。關稅退款稅前 $3.01億，貢獻 EPS $0.50；撇除後退款，GAAP EPS 仍升 42%、經調整 EPS 升 21%",
+    "Fun 101 收入增長近 27%，美容逾 9%，食品飲料近 7%；非商品銷售（廣告 Roundel、Target Circle 等）增長近 20%。三個月銷售全部正增長，返學期最旺。公司指 11 月至今銷售符合指引，並較 10 月加快",
+    "上調全年銷售增長指引至約 6%（較原區間再高 1 個百分點）；全年 GAAP／經調整 EPS 指引 $10.65–$11.40（原 $9.90–$10.90），當中已計約 $2.14 關稅退款。經營利潤率指引約 6.2%（含退款約 1.1 個百分點）。2027 年資本開支料 $50–60億。CNBC 較新盤前報道約跌 1%，Investing.com 早段曾報升 1.6%"
    ],
-   "source": "來源：Home Depot IR／PR Newswire、CNBC、Yahoo Finance、Investing.com"
+   "source": "來源：Target IR／PR Newswire、CNBC、Investing.com"
   },
   {
-   "name": "京東（JD）",
-   "date": "11/17 開市前",
-   "change": "盤前約 −3.4%",
+   "name": "Lowe's（LOW）",
+   "date": "11/18 開市前",
+   "change": "盤前約 −3% 以上",
    "changeTone": "down",
    "metrics": [
     {
      "label": "Sales",
-     "value": "¥3096億（$462億）",
-     "note": "+3.5% YoY · 略遜 LSEG 街估（¥3115億）",
-     "noteTone": "mid"
+     "value": "$22.8B",
+     "note": "+9.3% YoY · 勝街（LSEG 街估 $22.41B）",
+     "noteTone": "up"
     },
     {
-     "label": "非 GAAP EPADS",
-     "value": "¥5.88（$0.88）",
-     "note": "+57.6% YoY（去年 ¥3.73）· 經調整溢利略遜街估",
+     "label": "經調整 EPS",
+     "value": "$3.10",
+     "note": "+1.3% YoY · Investing.com 共識 $2.89；GAAP EPS $2.98（去年 $2.88）· 含關稅退款 $0.34",
      "noteTone": "up"
     }
    ],
    "bullets": [
-    "收入重返按年正增長；非 GAAP 經營利潤率由 0.1% 擴至 2.4%，營銷開支減少 26.2%。京東零售經營利潤 ¥151億、利潤率 5.8%（去年 5.9%）；新業務（外賣、京喜等）虧損按年同按季明顯收窄",
-    "商品收入 +3.1%、服務收入 +4.7%；電子及家電收入 ¥1,277.3億，略勝街估。11/12 完成收購歐洲電器零售 CECONOMY 59.8% 股權（總代價 13.35 億歐元），並自當日起併表",
-    "LSEG 口徑：收入街估 ¥3,114.8億、經調整溢利街估 ¥85.9億，實際 ¥3,096億／¥83億均略遜；另有來源指非 GAAP EPADS 大致符合街估 ¥5.88。Reuters 指內地消費審慎拖累需求"
+    "同店 +1.8%，連續第六季正增長；網上銷售 +17.4%，專業客戶（Pro）同家居服務表現穩健。關稅退款稅前約 $2.50億，貢獻 EPS $0.34，撇除後盈利勝幅明顯收窄。毛利率由去年 34.19% 收窄至 32.95%",
+    "上調全年銷售指引至約 $925億（原 $920億），同店由持平改為約 +0.5%；但經營利潤率指引微降至約 11.1%（原 11.2%），經調整約 11.5%（原 11.6%）。經調整全年 EPS 約 $12.25，略低過 FactSet 共識 $12.27（CNBC）／Investing.com $12.29",
+    "CNBC 指盤前跌逾 3%。市場聚焦毛利率受壓同盈利「含金量」，加上日前 Stifel、Zelman 下调評級仍有陰影。CEO Marvin Ellison 指即使樓市偏弱，公司仍有增長空間，12 月分析師會再交代增長計劃"
    ],
-   "source": "來源：京東 HKEX 公告／IR、Reuters、Investing.com"
+   "source": "來源：Lowe's IR／PR Newswire、CNBC、Investing.com"
   }
  ],
  "upcoming": [
   {
-   "date": "11/17",
-   "name": "NVIDIA（NVDA）",
-   "note": "週二收市後：黃仁勳辭任後首份業績；街估 EPS $2.49（去年 $1.24），焦點 Data Center 需求、指引同對華供貨限制"
-  },
-  {
-   "date": "11/18",
-   "name": "Target（TGT）· Lowe's（LOW）· TJX",
-   "note": "週三開市前：感恩節前零售需求；街估約 TGT EPS $2.03–2.07、LOW $2.89、TJX $1.34"
-  },
-  {
    "date": "11/18",
    "name": "Palo Alto Networks（PANW）",
-   "note": "週三收市後：網絡安全平台化同 ARR 指引；街估約 EPS $0.97、收入 $33.1億"
+   "note": "週三收市後：網絡安全平台化同 ARR；街估約 EPS $0.97、收入 $33.1億。管理層指引 Next-Gen Security ARR 約 $95.4–95.6億（+63%）"
   },
   {
    "date": "11/19",
    "name": "Walmart（WMT）· Alibaba（BABA）",
-   "note": "週四開市前：WMT 街估約 EPS $0.64、收入 $1,873億，睇美國消費；BABA 睇雲業務同 AI 投入"
+   "note": "週四開市前：WMT 街估約 EPS $0.64、收入 $1,874億，檢驗美國假期消費；BABA 街估約 EPS $1.63、收入 $405億，睇雲業務同 AI 投入"
   },
   {
    "date": "11/19",
    "name": "Intuit（INTU）",
-   "note": "週四收市後：AI 助理對 TurboTax／QuickBooks 增長嘅帶動；街估約 EPS $2.46、收入 $43.1億"
+   "note": "週四收市後：AI 助理對 TurboTax／QuickBooks 增長嘅帶動；街估約 EPS $2.46、收入 $43.0億"
   }
  ],
- "upcomingNote": "只列今個星期（11/16–11/20，日期為美東）。來源：NVIDIA IR、StockTitan、Investing.com、Yahoo Finance。"
+ "upcomingNote": "只列今個星期（11/16–11/20，日期為美東）。來源：Finviz、Seeking Alpha、Yahoo Finance、Palo Alto IR。"
 }
