@@ -256,6 +256,33 @@ td.up { color: var(--up); } td.down { color: var(--down); }
 #view-deemer .spark-wrap { margin-top: 10px; }
 #view-deemer .spark-wrap .k { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
 #view-deemer .spark { display: block; width: 100%; height: 36px; }
+#view-deemer .tile.cmp-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 10px 10px;
+  text-align: center;
+}
+#view-deemer .tile.cmp-card .housing { padding: 8px 6px; gap: 6px; }
+#view-deemer .tile.cmp-card .lamp { width: 22px; height: 22px; }
+#view-deemer .cmp-k { font-size: 13px; font-weight: 600; line-height: 1.25; }
+#view-deemer .cmp-v { font-size: 12px; font-weight: 500; color: var(--muted); }
+#view-deemer .cmp-v.g { color: var(--up); }
+#view-deemer .cmp-v.y { color: var(--mid); }
+#view-deemer .cmp-v.r { color: var(--down); }
+#view-deemer .list h2 .toggle {
+  appearance: none; -webkit-appearance: none;
+  border: 0; background: none; padding: 0; margin: 0;
+  font: inherit; font-size: 12px; font-weight: 400; line-height: inherit;
+  color: var(--accent); cursor: pointer;
+}
+#view-deemer .list h2 .toggle:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px;
+}
+#view-deemer table.dtr-collapsed { width: 100%; }
+#view-deemer table.dtr-collapsed .dtr-more,
+#view-deemer table.dtr-collapsed .px { display: none; }
 </style>
 </head>
 <body>
@@ -792,12 +819,38 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     var hi = data.strongestRc || {};
     var lo = data.weakestRc || {};
     var holds = rows.filter(function (r) { return r.kind === 'hold'; });
+    function rowByName(re) { return rows.filter(function (r) { return re.test(r.name || ''); })[0]; }
+    function dtr0(row) { return row && row.dtr && row.dtr[0] != null ? row.dtr[0] : null; }
+    function cmpLight(a, b) {
+      if (a == null || b == null) return '';
+      if (Number(a) > Number(b)) return 'g';
+      if (Number(a) < Number(b)) return 'r';
+      return 'y';
+    }
+    function cmpCard(label, color) {
+      var word = color === 'g' ? '偏多' : (color === 'y' ? '分歧' : (color === 'r' ? '偏空' : '–'));
+      var aria = label.replace(/&amp;/g, '&') + '，' + word;
+      return '<div class="tile cmp-card"><div class="housing" aria-hidden="true">'
+        + '<div class="lamp' + (color === 'g' ? ' on g' : '') + '"></div>'
+        + '<div class="lamp' + (color === 'y' ? ' on y' : '') + '"></div>'
+        + '<div class="lamp' + (color === 'r' ? ' on r' : '') + '"></div>'
+        + '</div><div class="cmp-k">' + label + '</div>'
+        + '<div class="cmp-v ' + color + '" aria-label="' + aria + '">' + word + '</div></div>';
+    }
+    var cashDtr = dtr0(rowByName(/t-?bills?/i));
+    var spyDtr = spx.dtr != null ? spx.dtr : dtr0(rowByName(/s\s*&\s*p\s*500/i));
+    var emDtr = dtr0(rowByName(/emerg/i));
+    var cashVsSpy = cmpLight(spyDtr, cashDtr);
+    var spyVsEm = cmpLight(spyDtr, emDtr);
+    var dtrOpen = !/(?:^|[?&])dtr=closed(?:&|$)/.test(location.search);
     var html = '<section class="tiles">';
     html += '<div class="tile"><div class="k">跑贏現金</div><div class="v">' + esc(String(bc.pct != null ? bc.pct + '%' : '–')) + '</div><div class="p">' + esc(bc.note || '') + '</div></div>';
     html += '<div class="tile"><div class="k">S&amp;P 今期排名</div><div class="v">' + esc(String(spx.rank != null ? spx.rank : '–')) + '</div>';
     html += '<div class="p">DTR ' + esc(String(spx.dtr != null ? spx.dtr : '–')) + ' · 週變 ' + rcTxt(spx.rc) + ' · 共 ' + esc(String(spx.total != null ? spx.total : rows.length)) + ' 行</div></div>';
     html += '<div class="tile"><div class="k">本週轉強</div><div class="v up">' + rcTxt(hi.rc) + '</div><div class="p">' + esc(hi.name || '') + '</div></div>';
     html += '<div class="tile"><div class="k">本週轉弱</div><div class="v down">' + rcTxt(lo.rc) + '</div><div class="p">' + esc(lo.name || '') + '</div></div>';
+    html += cmpCard('T-Bill 對 S&amp;P', cashVsSpy);
+    html += cmpCard('S&amp;P 對新興', spyVsEm);
     html += '</section>';
     html += '<section class="panel"><h2>而家持倉</h2><div class="hold">';
     if (!holds.length) html += '<div class="note">本週沒有標示持倉。</div>';
@@ -807,11 +860,15 @@ td.up { color: var(--up); } td.down { color: var(--down); }
     html += '</div>';
     if (data.holdingsNote) html += '<div class="note">' + esc(data.holdingsNote) + '</div>';
     html += '</section>';
-    var colCount = 2 + dtrDates.length + priceDates.length;
-    html += '<section class="panel list"><h2>DTR 強度排名</h2>';
-    html += '<div class="hint">R/C 在最前，接著是 DTR，價格（分）在最後，可左右滑。撳一行睇詳細。</div>';
-    html += '<div class="scroll"><table><thead><tr><th>板塊</th><th class="rc">R/C</th>';
-    dtrDates.forEach(function (d) { html += '<th class="dtr">DTR<span class="sub">' + esc(d) + '</span></th>'; });
+    function colCount() { return dtrOpen ? (2 + dtrDates.length + priceDates.length) : 3; }
+    html += '<section class="panel list"><h2>DTR 強度排名<button type="button" class="toggle" id="dtr-toggle" aria-expanded="' + (dtrOpen ? 'true' : 'false') + '">' + (dtrOpen ? '收埋' : '展開') + '</button></h2>';
+    html += '<div class="hint" id="dtr-hint">' + (dtrOpen
+      ? '各週 DTR 同價格可左右滑，撳一行睇詳細。'
+      : '只顯示今期 DTR，撳右上「展開」睇各週同價格。') + '</div>';
+    html += '<div class="scroll"><table id="deemer-table"' + (dtrOpen ? '' : ' class="dtr-collapsed"') + '><thead><tr><th>板塊</th><th class="rc">R/C</th>';
+    dtrDates.forEach(function (d, j) {
+      html += '<th class="dtr' + (j === 0 ? '' : ' dtr-more') + '">DTR<span class="sub">' + esc(d) + '</span></th>';
+    });
     priceDates.forEach(function (d) { html += '<th class="px">分<span class="sub">' + esc(d) + '</span></th>'; });
     html += '</tr></thead><tbody id="deemer-tbl">';
     rows.forEach(function (r, i) {
@@ -819,13 +876,37 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       var tag = r.kind === 'hold' ? '<span class="dtag">持倉</span>' : (r.kind === 'bench' ? '<span class="dtag ref">參考</span>' : '');
       html += '<tr class="' + cls + '" data-i="' + i + '"><td class="name"><span class="nm">' + esc(r.name) + '</span>' + (tag ? '<br>' + tag : '') + '</td>';
       html += '<td class="rc ' + rcCls(r.rc) + '">' + rcTxt(r.rc) + '</td>';
-      (r.dtr || []).forEach(function (v, j) { html += '<td class="dtr' + (j === 0 ? ' dtr0' : '') + '">' + v + '</td>'; });
+      (r.dtr || []).forEach(function (v, j) { html += '<td class="dtr' + (j === 0 ? ' dtr0' : ' dtr-more') + '">' + v + '</td>'; });
       (r.prices || []).forEach(function (v) { html += '<td class="px">' + v + '</td>'; });
       html += '</tr>';
     });
     html += '</tbody></table></div></section>';
     $('deemer-body').innerHTML = html;
     var openI = -1;
+    function syncDetailColspan() {
+      var det = $('deemer-tbl').querySelector('tr.detail td');
+      if (det) det.colSpan = colCount();
+    }
+    function setDtrOpen(on) {
+      dtrOpen = on;
+      var table = $('deemer-table');
+      var btn = $('dtr-toggle');
+      var hint = $('dtr-hint');
+      if (on) table.classList.remove('dtr-collapsed');
+      else table.classList.add('dtr-collapsed');
+      btn.textContent = on ? '收埋' : '展開';
+      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      hint.textContent = on
+        ? '各週 DTR 同價格可左右滑，撳一行睇詳細。'
+        : '只顯示今期 DTR，撳右上「展開」睇各週同價格。';
+      syncDetailColspan();
+      syncPagerHeight();
+    }
+    $('dtr-toggle').addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setDtrOpen(!dtrOpen);
+    });
     $('deemer-tbl').addEventListener('click', function (e) {
       var tr = e.target.closest('tr');
       if (!tr || tr.classList.contains('detail')) return;
@@ -839,7 +920,7 @@ td.up { color: var(--up); } td.down { color: var(--down); }
       tr.classList.add('open');
       var det = document.createElement('tr');
       det.className = 'detail';
-      det.innerHTML = '<td colspan="' + colCount + '">' + deemerDetail(rows[i], dtrDates, priceDates) + '</td>';
+      det.innerHTML = '<td colspan="' + colCount() + '">' + deemerDetail(rows[i], dtrDates, priceDates) + '</td>';
       tr.parentNode.insertBefore(det, tr.nextSibling);
       syncPagerHeight();
     });
