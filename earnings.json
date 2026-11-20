@@ -1,98 +1,87 @@
 {
- "updated": "2026-11-19T20:45:00+08:00",
- "updatedLabel": "11/19 20:45",
- "focus": "週四美東盤前期貨偏強（Yahoo Finance 美東約 7:00：道指期約 +0.6%、標指期約 +1%、納指期約 +2%），市場焦點係 Anthropic IPO：以每股 $83 定價、擴大發行至 9.25 億股，估值超過 $1 萬億，今日開始交易。Palo Alto 業績同全年指引勝預期，盤前約 +9.6%。開市前零售同中概分化：Walmart 數字微勝並第三次上調全年指引，但盤前約跌 1.7%；阿里雲收入 +53%、非 GAAP 盈利 +86%，惟盈利遜於部分街估、自由現金流流出擴大，美股盤前約跌 1.7%。今日另有首次申請失業救濟同製造業數據；收市後留意 Intuit，週五開市前有 BJ's Wholesale。NVIDIA 正嘗試扭轉連跌五日嘅走勢。",
+ "updated": "2026-11-20T20:50:00+08:00",
+ "updatedLabel": "11/20 20:50",
+ "focus": "週五美東盤前期貨偏弱（Yahoo Finance 美東約 7:30：道指期約 −0.2%、標指期約 −0.9%、納指期約 −1.8%）。Anthropic 上市翌日盤前回吐約 6%–8%（外電報週四收市約 $97.17）。NVIDIA 盤前約跌 2.8%（Yahoo Finance 美東 7:39，$141.85）。開市前軟件同零售均受壓：Intuit 季績勝出但下調全年收入指引並出售 Mailchimp，盤前約跌 9.4%；Elastic 季績勝出但指引受匯兌拖累，盤前再跌約 4.6%；BJ's 數字大勝並上調全年指引，但毛利率受週年慶促銷拖累，盤前約跌 6.8%。今個星期大型業績已大致公布完畢，週五收市後僅餘小型股。",
  "stocks": [
   {
-   "name": "Walmart（WMT）",
-   "date": "11/19 開市前",
-   "change": "盤前約 −1.7%",
+   "name": "BJ's Wholesale Club（BJ）",
+   "date": "11/20 開市前",
+   "change": "盤前約 −6.8%",
    "changeTone": "down",
    "metrics": [
     {
      "label": "Sales",
-     "value": "$188.8B",
-     "note": "+5.2% YoY · 勝街（LSEG 街估 $187.27B；CNBC 報實際 $188.84B）",
+     "value": "$6.28B",
+     "note": "+17.5% YoY · 勝街（StreetInsider 街估 $5.94B；官方總收入 $6,283.5M，淨銷售 +17.7%）",
      "noteTone": "up"
     },
     {
      "label": "經調整 EPS",
-     "value": "$0.65",
-     "note": "+4.8% YoY（去年經調整 $0.62）· 勝街（LSEG $0.64）；GAAP EPS $0.62（去年 $0.77）",
+     "value": "$1.73",
+     "note": "+49% YoY（去年經調整 $1.16）· 勝街（StreetInsider $1.26）；GAAP EPS 同為 $1.73（去年 $1.15，+50%）",
      "noteTone": "up"
     }
    ],
    "bullets": [
-    "美國 Walmart 淨銷售 $1,250億（+3.6%），撇除燃油同店 +2.9%，符合 StreetAccount 街估。全球電商 +17%，當中美國 Walmart 電商 +23%、Sam's Club 美國電商 +30%。美國廣告業務 +37%，全球廣告 +25%；全球會員費收入 +17%。CEO 指食品類市佔錄得三年最大升幅，並對近 8,000 件商品減價",
-    "第三次上調全年指引：淨銷售增長（固定匯率）4.9%–5.2%（前 4%–5%），經調整經營溢利增長 8.0%–8.6%（前 7.0%–8.5%），經調整 EPS $2.84–$2.89（前 $2.80–$2.87）。毛利率擴張 28 個基點；經營溢利 +16.0%，經調整（固定匯率）+5.5%。全球庫存 +8.1%，官方指受策略舉措、季節性時點同成本通脹影響",
-    "CFO 向 CNBC 指繼續搶市佔，並對假期消費審慎樂觀，稱第 4 季「開局幾不錯」。CEO 指 AI 助理 Sparky 帶動平均購物籃約 +40%；10 月底推出嘅 Walmart+ 同 Sam's Club 聯合會員，已為 Sam's Club 帶來約 200 萬新顧客。Yahoo Finance 美東 7:40 盤前 $125.23，跌 1.67%"
+    "同店銷售 +13.5%，撇除燃油 +4.1%。會員費收入 $1.384億（+9.5%），官方稱錄得創紀錄會員水平。數碼化同店銷售 +38%，兩年累計 +69%。期內新開 2 間俱樂部同 5 個油站",
+    "上調 2026 財年指引（截至 2027 年 1 月 30 日）：撇除燃油同店增長 2.5%–3.0%（前 2.0%–3.0%），經調整 EPS $5.10–$5.30（前 $4.60–$4.80）。經營溢利 +43.7% 至 $3.14億；經調整 EBITDA +39.9% 至 $4.22億。資本開支維持約 $8億",
+    "商品毛利率約跌 170 個基點，官方指主要因 42 週年慶促銷。數字大勝並上調全年指引，但盤前仍然受壓。Yahoo Finance 美東 7:38 盤前 $103.20，跌 6.78%"
    ],
-   "source": "來源：Walmart IR／Business Wire、CNBC、Yahoo Finance"
+   "source": "來源：BJ's IR／SEC 8-K、Business Wire、StreetInsider、Yahoo Finance"
   },
   {
-   "name": "阿里巴巴（BABA）",
-   "date": "11/19 開市前",
-   "change": "盤前約 −1.7%",
+   "name": "Intuit（INTU）",
+   "date": "11/19 收市後",
+   "change": "盤前約 −9.4%",
    "changeTone": "down",
    "metrics": [
     {
      "label": "Sales",
-     "value": "人民幣 2,715.19億（約 US$40.50B）",
-     "note": "+10% YoY · 勝街（LSEG 街估人民幣 2,698.1億）",
-     "noteTone": "up"
-    },
-    {
-     "label": "非 GAAP EPS（ADS）",
-     "value": "RMB8.10（US$1.21）",
-     "note": "+86% YoY · 遜於部分街估（Visible Alpha RMB8.98；Reuters 報街估 RMB11.16）；GAAP 每股 ADS RMB25.94（US$3.87）",
-     "noteTone": "mid"
-    }
-   ],
-   "bullets": [
-    "AI 雲同算力（AI Cloud and Compute Services）收入人民幣 609.7億，+53% YoY；對外客戶收入 +64%，經常性對外收入（撇除算力設備方案）+67%。AI 相關產品收入連續第 13 季錄得三位數增長。雲分部經調整 EBITA 利潤率升至 14.5%。Morningstar 指雲同算力經調整 EBITA 人民幣 88.3億（+121%），但 AI 實驗室（含 Qwen）虧損擴大至人民幣 105億",
-    "經調整 EBITA 人民幣 326.36億，+260% YoY；非 GAAP 淨利潤人民幣 199.09億，+92%。電商集團經調整 EBITA +243%，主因即時零售虧損明顯收窄。客戶管理收入（CMR）−5%，撇除新業務拓展計劃對收入的對沖影響後，按可比口徑約 +1%。Reuters 指中國電商收入 −5%，國際電商 −8%（受歐盟關務改革影響）",
-    "自由現金流流出人民幣 344.72億（去年同期流出 218.40億），官方指主要因雲基建開支增加；Reuters 指資本開支 +60% 至人民幣 504.8億。期末現金同其他流動投資人民幣 4,879.29億。T-Head 發布新一代鎮武 V900 AI 芯片。Yahoo Finance 美東 7:40 美股盤前 $82.93，跌 1.68%"
-   ],
-   "source": "來源：Alibaba IR、Reuters、Morningstar、Yahoo Finance"
-  },
-  {
-   "name": "Palo Alto Networks（PANW）",
-   "date": "11/18 收市後",
-   "change": "盤前約 +9.6%（週三收市已升 9.9%）",
-   "changeTone": "up",
-   "metrics": [
-    {
-     "label": "Sales",
-     "value": "$3.44B",
-     "note": "+39% YoY · 勝街（LSEG 街估 $3.31B）",
+     "value": "$4.35B",
+     "note": "+12% YoY · 勝街（Investing.com 街估 $4.31B；官方總收入 $4,354M，去年 $3,885M）",
      "noteTone": "up"
     },
     {
      "label": "非 GAAP EPS",
-     "value": "$1.05",
-     "note": "+13% YoY（去年 $0.93）· 勝街（LSEG $0.97）；GAAP EPS $0.57（去年 $0.47）",
+     "value": "$2.91",
+     "note": "+56% YoY（去年 $1.87）· 勝街（Investing.com $2.70）；GAAP EPS $2.59（+63%）",
      "noteTone": "up"
     }
    ],
    "bullets": [
-    "Next-Generation Security ARR $97.3億（+66% YoY），官方稱為歷來最高季度淨新增 NGS ARR 之一，大幅高過自身指引。剩餘履約責任（RPO）$210億（+35%），當中流動 RPO $94億（+36%）",
-    "上調 2027 財年指引：收入 $145.2–145.7億（原 $141–142億；LSEG 街估 $141.6億），經調整 EPS $4.26–$4.30（原 $4.16–$4.19；LSEG $4.18）。第 2 季指引收入 $35.30–35.50億（+36%–37%，高過 FactSet 街估 $34.2億），經調整 EPS $1.01–$1.03（FactSet 街估 $1.01）",
-    "三大分部增長加快：Network & AI Security 收入 $23億（+20%），Cortex +53%（pro forma +40%），Idira 身份安全 pro forma +23%。經調整自由現金流 $19億，利潤率 56.2%。Yahoo Finance 美東 7:40 盤前 $372.46，升 9.57%；週三正規時段收市 $339.92，已升 9.90%"
+    "Global Business Solutions 收入 $31億（+15%），當中網上生態圈 +20% 至 $24億；QuickBooks Online Accounting +19% 至 $14億。消費者業務 +7% 至 $9.58億，Credit Karma +9% 至 $7.08億，TurboTax 僅 +1% 至 $1.99億，Mailchimp −1% 至 $3.13億。CEO 指收入、經營溢利同每股盈利均高過自身指引上限",
+    "宣布向 Bending Spoons 出售 Mailchimp，作價約 $36.8億（現金 $33.1億加股份 $3.68億），預期 2027 年曆年年初完成，現金所得擬於 2027 財年內回購股份。Investing.com 指相對 2021 年約 $120億收購價折讓顯著",
+    "下調 2027 財年收入指引至 $230.81–233.65億（增長 8%–9%，前 $232.8–235.1億），主因 Credit Karma 改為增長 3%–7%（官方新區間 $27.21–28.26億；Morningstar 報前指引約 $29.2–29.7億）。重申全年非 GAAP EPS $22.88–$23.12（Investing.com 街估 $23.62）。第 2 季收入指引 $49.31–49.54億（+6%–7%），Yahoo Finance 指遜於預期。Yahoo Finance 美東 7:38 盤前 $281.00，跌 9.36%"
    ],
-   "source": "來源：Palo Alto Networks IR、CNBC、Yahoo Finance、Morningstar"
-  }
- ],
- "upcoming": [
-  {
-   "date": "11/19",
-   "name": "Intuit（INTU）",
-   "note": "週四收市後：AI 助理對 TurboTax／QuickBooks 增長嘅帶動；街估約 EPS $2.46、收入 $43.0億"
+   "source": "來源：Intuit IR／SEC 8-K、Investing.com、Morningstar、Yahoo Finance"
   },
   {
-   "date": "11/20",
-   "name": "BJ's Wholesale Club（BJ）",
-   "note": "週五開市前：倉儲會員店假期前消費檢驗；街估約 EPS $1.24、收入 $59.3億"
+   "name": "Elastic（ESTC）",
+   "date": "11/19 收市後",
+   "change": "盤前約 −4.6%（週四收市已跌 8.1%）",
+   "changeTone": "down",
+   "metrics": [
+    {
+     "label": "Sales",
+     "value": "$496M",
+     "note": "+17% YoY（官方稱按報告同固定匯率皆 +17%）· 勝自身指引",
+     "noteTone": "up"
+    },
+    {
+     "label": "非 GAAP EPS",
+     "value": "$0.94",
+     "note": "勝街（StreetInsider 報高過街估 13 美仙，即約 $0.81；Briefing 去年 $0.64，約 +47% YoY）；GAAP EPS $0.00",
+     "noteTone": "up"
+    }
+   ],
+   "bullets": [
+    "訂閱收入 $4.65億（+17%），銷售主導訂閱 $4.15億（+19%）。流動剩餘履約責任（cRPO）$11.57億（+19%，固定匯率 +20%），剩餘履約責任 $18.58億（+23%）。非 GAAP 經營溢利 $1.10億，利潤率 22.2%；GAAP 經營溢利 $2,200萬，利潤率 4.4%。年合約價值逾 $10萬客戶超過 1,830 個；淨擴張率約 111%。CEO 指全線主要指標勝自身指引",
+    "第 3 季收入指引 $5.075–5.085億（中位數約 +12.9%，固定匯率 +13.9%），全年 $20.00–20.08億（中位數 +15.2%），分別計入 $450萬及 $950萬匯兌逆風。Seeking Alpha、Investing.com 指指引遜於街估，股價受壓。另外宣布計劃收購 HoneyHive，加強 agent observability",
+    "Yahoo Finance 週四收市 $76.33，跌 8.05%；美東 7:39 盤前 $72.61，再跌 4.58%"
+   ],
+   "source": "來源：Elastic IR、StreetInsider、Seeking Alpha、Investing.com、Yahoo Finance"
   }
  ],
- "upcomingNote": "只列今個星期（11/16–11/20，日期為美東）。來源：Finviz、Seeking Alpha、Yahoo Finance、Intuit IR、MarketBeat。"
+ "upcoming": [],
+ "upcomingNote": "只列今個星期（11/16–11/20，日期為美東）。來源：Finviz、Seeking Alpha、Yahoo Finance、公司 IR。"
 }
