@@ -1,12 +1,64 @@
 {
- "updated": "2026-11-20T20:50:00+08:00",
- "updatedLabel": "11/20 20:50",
- "focus": "週五美東盤前期貨偏弱（Yahoo Finance 美東約 7:30：道指期約 −0.2%、標指期約 −0.9%、納指期約 −1.8%）。Anthropic 上市翌日盤前回吐約 6%–8%（外電報週四收市約 $97.17）。NVIDIA 盤前約跌 2.8%（Yahoo Finance 美東 7:39，$141.85）。開市前軟件同零售均受壓：Intuit 季績勝出但下調全年收入指引並出售 Mailchimp，盤前約跌 9.4%；Elastic 季績勝出但指引受匯兌拖累，盤前再跌約 4.6%；BJ's 數字大勝並上調全年指引，但毛利率受週年慶促銷拖累，盤前約跌 6.8%。今個星期大型業績已大致公布完畢，週五收市後僅餘小型股。",
+ "updated": "2026-11-23T20:49:00+08:00",
+ "updatedLabel": "11/23 20:49",
+ "focus": "週一美東盤前期貨顯著反彈（Yahoo Finance 美東約 7:37：納指期約 +3.1%、標指期約 +2.4%、道指期約 +1.8%），晶片同 AI 相關股份帶動，NVIDIA 盤前約升 6.7%（Yahoo Finance 美東 7:47，$133.90）。CrowdStrike 宣布以全股票交易、作價約 $439億收購 Zscaler（每股換 1.135 股 CrowdStrike，Yahoo Finance 指隱含約 $260.41、較上周五收市溢價約 34%），Zscaler 盤前約升 18.6%，CrowdStrike 因稀釋同整合疑慮約跌 8.9%。今個星期為感恩節短週（週四休市、週五提早 1:00 p.m. 美東收市），今晚還有 HPE、Zoom 公布，週二有 Analog Devices、Dell，週三有 Deere。",
  "stocks": [
+  {
+   "name": "CrowdStrike（CRWD）",
+   "date": "11/23 開市前",
+   "change": "盤前 −8.91%",
+   "changeTone": "down",
+   "metrics": [
+    {
+     "label": "Sales",
+     "value": "$1.58B",
+     "note": "+28% YoY（官方對比去年 $1.23B）· 勝街（Finviz 街估 $1.53B）",
+     "noteTone": "up"
+    },
+    {
+     "label": "非 GAAP EPS",
+     "value": "$0.34",
+     "note": "+42% YoY（去年 $0.24）· 勝街（Finviz 街估 $0.31）；GAAP EPS $0.02（去年虧損 $0.03）",
+     "noteTone": "up"
+    }
+   ],
+   "bullets": [
+    "官方稱此為史上最佳一季：訂閱收入 $15.0億（+29%）；期末 ARR $62.6億（+27%，連續第五季加速），淨新增 ARR $4.192億（+58%，同創紀錄）。經營現金流 $6.652億、自由現金流 $4.744億，皆為歷史新高。GAAP 轉為盈利，淨利 $2,490萬",
+    "同步宣布以全股票交易收購 Zscaler，作價約 $439億，Zscaler 股東每股換 1.135 股 CrowdStrike（Yahoo Finance 指隱含約 $260.41，較上周五收市溢價約 34%）。官方預期交割後即時增厚每股自由現金流（未計協同效應），並稱合併後將進入網絡安全最大 TAM。原定 12/1 業績會改為今日美東 8:00 舉行",
+    "上調全年展望：FY27 收入 $60.781–60.841億，非 GAAP EPS $1.28；第 4 季收入 $16.381–16.441億（Yahoo Finance 引述 LSEG 街估約 $16.2億），非 GAAP EPS $0.36（與街估大致一致）。盤前因收購稀釋、整合同監管疑慮受壓。Yahoo Finance 美東 7:45 盤前 $209.00，跌 8.91%"
+   ],
+   "source": "來源：CrowdStrike IR／新聞稿、Finviz、Yahoo Finance"
+  },
+  {
+   "name": "Zscaler（ZS）",
+   "date": "11/23 開市前",
+   "change": "盤前 +18.57%",
+   "changeTone": "up",
+   "metrics": [
+    {
+     "label": "Sales",
+     "value": "$949.3M",
+     "note": "+20% YoY（官方對比去年 $788.1M）· 勝街（Seeking Alpha 報勝出約 $11.14M）",
+     "noteTone": "up"
+    },
+    {
+     "label": "非 GAAP EPS",
+     "value": "$1.23",
+     "note": "+28% YoY（去年 $0.96）· 勝街（Seeking Alpha 街估 $1.16）；GAAP 每股虧損 $0.17（去年虧 $0.07）",
+     "noteTone": "up"
+    }
+   ],
+   "bullets": [
+    "ARR $38.82億（+21%，去年 $32.04億）。淨新增 ARR $1.11億；撇除去年同期收購 Red Canary 貢獻的 $9,800萬後，淨新增 ARR 增長 22%。剩餘履約責任（RPO）$72.87億（+23%）。經營現金流創紀錄 $5.41億，自由現金流創紀錄 $4.165億",
+    "非 GAAP 經營溢利 $2.302億，利潤率 24.3%（去年 21.8%）。GAAP 經營虧損收窄至 $3,320萬，但 GAAP 淨虧損擴大至 $2,740萬。因即將被 CrowdStrike 收購，公司取消原定業績會，並撤回先前已公布的財務指引",
+    "收購以全股票進行，Zscaler 股東每股換 1.135 股 CrowdStrike。Yahoo Finance 美東 7:45 盤前 $231.00，升 18.57%"
+   ],
+   "source": "來源：Zscaler IR／新聞稿（Exhibit 99.1）、Seeking Alpha、Yahoo Finance"
+  },
   {
    "name": "BJ's Wholesale Club（BJ）",
    "date": "11/20 開市前",
-   "change": "盤前約 −6.8%",
+   "change": "週五收市 −5.35%",
    "changeTone": "down",
    "metrics": [
     {
@@ -25,63 +77,37 @@
    "bullets": [
     "同店銷售 +13.5%，撇除燃油 +4.1%。會員費收入 $1.384億（+9.5%），官方稱錄得創紀錄會員水平。數碼化同店銷售 +38%，兩年累計 +69%。期內新開 2 間俱樂部同 5 個油站",
     "上調 2026 財年指引（截至 2027 年 1 月 30 日）：撇除燃油同店增長 2.5%–3.0%（前 2.0%–3.0%），經調整 EPS $5.10–$5.30（前 $4.60–$4.80）。經營溢利 +43.7% 至 $3.14億；經調整 EBITDA +39.9% 至 $4.22億。資本開支維持約 $8億",
-    "商品毛利率約跌 170 個基點，官方指主要因 42 週年慶促銷。數字大勝並上調全年指引，但盤前仍然受壓。Yahoo Finance 美東 7:38 盤前 $103.20，跌 6.78%"
+    "商品毛利率約跌 170 個基點，官方指主要因 42 週年慶促銷。數字大勝並上調全年指引，但週五仍然受壓。Yahoo Finance 週五收市 $104.82，跌 5.35%（上日收市 $110.75）"
    ],
    "source": "來源：BJ's IR／SEC 8-K、Business Wire、StreetInsider、Yahoo Finance"
-  },
-  {
-   "name": "Intuit（INTU）",
-   "date": "11/19 收市後",
-   "change": "盤前約 −9.4%",
-   "changeTone": "down",
-   "metrics": [
-    {
-     "label": "Sales",
-     "value": "$4.35B",
-     "note": "+12% YoY · 勝街（Investing.com 街估 $4.31B；官方總收入 $4,354M，去年 $3,885M）",
-     "noteTone": "up"
-    },
-    {
-     "label": "非 GAAP EPS",
-     "value": "$2.91",
-     "note": "+56% YoY（去年 $1.87）· 勝街（Investing.com $2.70）；GAAP EPS $2.59（+63%）",
-     "noteTone": "up"
-    }
-   ],
-   "bullets": [
-    "Global Business Solutions 收入 $31億（+15%），當中網上生態圈 +20% 至 $24億；QuickBooks Online Accounting +19% 至 $14億。消費者業務 +7% 至 $9.58億，Credit Karma +9% 至 $7.08億，TurboTax 僅 +1% 至 $1.99億，Mailchimp −1% 至 $3.13億。CEO 指收入、經營溢利同每股盈利均高過自身指引上限",
-    "宣布向 Bending Spoons 出售 Mailchimp，作價約 $36.8億（現金 $33.1億加股份 $3.68億），預期 2027 年曆年年初完成，現金所得擬於 2027 財年內回購股份。Investing.com 指相對 2021 年約 $120億收購價折讓顯著",
-    "下調 2027 財年收入指引至 $230.81–233.65億（增長 8%–9%，前 $232.8–235.1億），主因 Credit Karma 改為增長 3%–7%（官方新區間 $27.21–28.26億；Morningstar 報前指引約 $29.2–29.7億）。重申全年非 GAAP EPS $22.88–$23.12（Investing.com 街估 $23.62）。第 2 季收入指引 $49.31–49.54億（+6%–7%），Yahoo Finance 指遜於預期。Yahoo Finance 美東 7:38 盤前 $281.00，跌 9.36%"
-   ],
-   "source": "來源：Intuit IR／SEC 8-K、Investing.com、Morningstar、Yahoo Finance"
-  },
-  {
-   "name": "Elastic（ESTC）",
-   "date": "11/19 收市後",
-   "change": "盤前約 −4.6%（週四收市已跌 8.1%）",
-   "changeTone": "down",
-   "metrics": [
-    {
-     "label": "Sales",
-     "value": "$496M",
-     "note": "+17% YoY（官方稱按報告同固定匯率皆 +17%）· 勝自身指引",
-     "noteTone": "up"
-    },
-    {
-     "label": "非 GAAP EPS",
-     "value": "$0.94",
-     "note": "勝街（StreetInsider 報高過街估 13 美仙，即約 $0.81；Briefing 去年 $0.64，約 +47% YoY）；GAAP EPS $0.00",
-     "noteTone": "up"
-    }
-   ],
-   "bullets": [
-    "訂閱收入 $4.65億（+17%），銷售主導訂閱 $4.15億（+19%）。流動剩餘履約責任（cRPO）$11.57億（+19%，固定匯率 +20%），剩餘履約責任 $18.58億（+23%）。非 GAAP 經營溢利 $1.10億，利潤率 22.2%；GAAP 經營溢利 $2,200萬，利潤率 4.4%。年合約價值逾 $10萬客戶超過 1,830 個；淨擴張率約 111%。CEO 指全線主要指標勝自身指引",
-    "第 3 季收入指引 $5.075–5.085億（中位數約 +12.9%，固定匯率 +13.9%），全年 $20.00–20.08億（中位數 +15.2%），分別計入 $450萬及 $950萬匯兌逆風。Seeking Alpha、Investing.com 指指引遜於街估，股價受壓。另外宣布計劃收購 HoneyHive，加強 agent observability",
-    "Yahoo Finance 週四收市 $76.33，跌 8.05%；美東 7:39 盤前 $72.61，再跌 4.58%"
-   ],
-   "source": "來源：Elastic IR、StreetInsider、Seeking Alpha、Investing.com、Yahoo Finance"
   }
  ],
- "upcoming": [],
- "upcomingNote": "只列今個星期（11/16–11/20，日期為美東）。來源：Finviz、Seeking Alpha、Yahoo Finance、公司 IR。"
+ "upcoming": [
+  {
+   "date": "11/23",
+   "name": "Hewlett Packard Enterprise（HPE）",
+   "note": "週一收市後：街估非 GAAP EPS 約 $1.28、收入約 $145億；焦點係 AI 伺服器積壓能否如期出貨"
+  },
+  {
+   "date": "11/23",
+   "name": "Zoom（ZM）",
+   "note": "週一收市後：街估經調整 EPS 約 $1.49、收入約 $12.8億"
+  },
+  {
+   "date": "11/24",
+   "name": "Analog Devices（ADI）",
+   "note": "週二開市前：街估 EPS 約 $3.90、收入約 $43億，市場預期延續高增長"
+  },
+  {
+   "date": "11/24",
+   "name": "Dell Technologies（DELL）",
+   "note": "週二收市後：街估收入約 $492億、非 GAAP EPS 約 $6.56；焦點 AI 伺服器同記憶體成本"
+  },
+  {
+   "date": "11/25",
+   "name": "Deere（DE）",
+   "note": "週三開市前：街估 EPS 約 $4.07；焦點 2027 年展望。週四感恩節休市，週五提早 1:00 p.m. 美東收市"
+  }
+ ],
+ "upcomingNote": "只列今個星期（11/23–11/27，日期為美東）"
 }
