@@ -82,6 +82,32 @@
    "source": "來源：Zoom 新聞稿（SEC 8-K Exhibit 99.1）、StreetInsider、MarketWatch、Benzinga、Public.com"
   }
  ],
- "upcoming": [],
+ "upcoming": [
+  {
+   "date": "11/24",
+   "name": "Dell Technologies（DELL）",
+   "note": "週二收市後：街估經調整 EPS 約 $6.60、收入約 $493億（約 +82% YoY）；焦點 AI 伺服器需求 vs 記憶體成本壓利潤"
+  },
+  {
+   "date": "11/24",
+   "name": "HP Inc.（HPQ）",
+   "note": "週二收市後：街估 EPS 約 $0.75、收入約 $154.2億；焦點 PC 需求同記憶體成本"
+  },
+  {
+   "date": "11/24",
+   "name": "Workday（WDAY）",
+   "note": "週二收市後：街估 EPS 約 $2.75、收入約 $26.9億；焦點訂閱增長同 AI 產品"
+  },
+  {
+   "date": "11/24",
+   "name": "Autodesk（ADSK）",
+   "note": "週二收市後：街估 EPS 約 $3.07、收入約 $21.3億"
+  },
+  {
+   "date": "11/25",
+   "name": "Deere（DE）",
+   "note": "週三開市前：街估 EPS 約 $4.03、收入約 $103.8億；焦點 2027 年展望"
+  }
+ ],
  "upcomingNote": "只列今個星期餘下（11/24–11/27，日期為美東）。週四感恩節休市，週五提早 1:00 p.m. 美東收市。來源：TheStreet、EarningsMadness、MarketBeat、TipRanks。"
 }
